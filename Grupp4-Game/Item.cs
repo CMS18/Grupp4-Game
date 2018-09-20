@@ -9,8 +9,8 @@ namespace Grupp4_Game
     
    class Item
     {
-        string ItemName { get; set; }
-        string Description { get; set; }
+        public string ItemName { get; set; }
+        public string Description { get; set; }
         public Item(string itemname, string description)
         {
             this.ItemName = itemname;
@@ -26,11 +26,31 @@ namespace Grupp4_Game
         {
             //Inspect()
 
+        //Name
+        //Description
+        //Use()
+        //Inspect()
+
         }
 
         //Key - HouseKey
 
         //Weapon - Type
+        public Item()
+        {
+
+        }
+
+        public string itemName1(string beerCan)
+        {
+            string userInput = Console.ReadLine();
+            beerCan = userInput;
+            return beerCan;
+        }
+
+
+
+
     }
 
    
