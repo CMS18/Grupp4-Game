@@ -16,9 +16,9 @@ namespace Grupp4_Game
             this.RoomName = roomname;
             this.RoomDescription = roomdescription;
         }
-        List<Exit> Exits = new List<Exit>();
-        //RoomInventory List<item>
-        //ExitList : List<Exit>
+        List<Exit> Exits = new List<Exit>();  //ExitList : List<Exit>
+        List<Item> RoomInventory = new List<Item>(); //RoomInventory List<item>
+       
         public void ShowDescription()
         {
 

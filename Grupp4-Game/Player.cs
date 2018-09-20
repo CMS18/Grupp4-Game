@@ -8,7 +8,7 @@ namespace Grupp4_Game
 {
     class Player
     {
-        public string Name { get => name; }
+        public string Name { get; set; }
         private readonly string name;
         List<Item> inventoryList = new List<Item>();
 

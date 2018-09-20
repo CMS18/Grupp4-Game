@@ -11,15 +11,23 @@ namespace Grupp4_Game
     {
         public string ItemName { get; set; }
         public string Description { get; set; }
-        public Item(string itemname, string description)
+        public int KeyID { get; set; }
+        public Item(string itemname, string description) // två parametrar
         {
             this.ItemName = itemname;
             this.Description = description;
         }
+        public Item (string itemname, string description, int keyID) // tre parametrar om nyckel
+        {
+            this.ItemName = itemname;
+            this.Description = description;
+            this.KeyID = keyID;
+
+        }
 
         public void Use()
         {
-            //Use()
+            
         }
 
         public void Inspect ()
