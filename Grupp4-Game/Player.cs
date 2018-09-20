@@ -8,15 +8,44 @@ namespace Grupp4_Game
 {
     class Player
     {
-
+        string name { get; set; }
+        List<Item> InventoryList = new List<Item>();
+        
+    public Player(string name)
+        {
+            this.name = name;
+        }
         //Name
         //InventoryList
         //CurrentPosition
-        //PickUpItem()
-        //showInventory()
-        //UseItem()
-        //Move()
-        //DropItem()
-        //Look()
+        public void PickUpItem()
+        {
+            //PickUpItem()
+        }
+
+        public void ShowInventory()
+        {
+            //showInventory()
+        }
+
+        public void UseItem()
+        {
+            //UseItem()
+        }
+
+        public void Move()
+        {
+            //Move()
+        }
+
+        public void DropItem()
+        {
+            //DropItem()
+        }
+
+        public void Look()
+        {
+            //Look
+        }
     }
-}
+    }

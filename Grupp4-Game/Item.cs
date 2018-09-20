@@ -8,10 +8,24 @@ namespace Grupp4_Game
 {
     class Item
     {
-        //Name
-        //Description
-        //Use()
-        //Inspect()
+        string ItemName { get; set; }
+        string Description { get; set; }
+        public Item(string itemname, string description)
+        {
+            this.ItemName = itemname;
+            this.Description = description;
+        }
+
+        public void Use()
+        {
+            //Use()
+        }
+
+        public void Inspect ()
+        {
+            //Inspect()
+
+        }
 
         //Key - HouseKey
 
