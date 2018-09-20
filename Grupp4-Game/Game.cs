@@ -8,6 +8,7 @@ namespace Grupp4_Game
 {
     class Game
     {
+
         //PlayerName
         //RoomList
         //Victory
