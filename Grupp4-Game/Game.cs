@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Grupp4_Game
 {
-    class Program
+    class Game
     {
-        static void Main(string[] args)
-        {
-            //WorldBuilder??
-
-            //Anropa klasser samt Meny
-        }
+        //PlayerName
+        //RoomList
+        //Victory
+        //PlayingGame()
     }
 }

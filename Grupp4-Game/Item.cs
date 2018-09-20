@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Grupp4_Game
 {
-    class Program
+    class Item
     {
-        static void Main(string[] args)
-        {
-            //WorldBuilder??
+        //Name
+        //Description
+        //Use()
+        //Inspect()
 
-            //Anropa klasser samt Meny
-        }
+        //Key - HouseKey
+
+        //Weapon - Type
     }
 }
