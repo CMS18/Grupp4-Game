@@ -8,10 +8,11 @@ namespace Grupp4_Game
 {
     class Player
     {
-        string name { get; set; }
-        List<Item> InventoryList = new List<Item>();
-        
-    public Player(string name)
+        public string Name { get => name; }
+        private readonly string name;
+        List<Item> inventoryList = new List<Item>();
+
+        public Player(string name)
         {
             this.name = name;
         }
@@ -25,7 +26,10 @@ namespace Grupp4_Game
 
         public void ShowInventory()
         {
-            //showInventory()
+            foreach (Item item in inventoryList)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         public void UseItem()
@@ -38,9 +42,22 @@ namespace Grupp4_Game
             //Move()
         }
 
-        public void DropItem()
+        public void DropItem(string itemToDrop)
         {
-            //DropItem()
+            bool removedItem = false;
+            foreach (Item item in inventoryList)
+            {
+                if (item.ItemName.ToLower() == itemToDrop.ToLower())
+                {
+                    Console.WriteLine("Dropped item {0}.", item.ItemName);
+                    inventoryList.Remove(item);
+                    removedItem = true;
+                }
+            }
+            if (removedItem == false)
+            {
+                Console.WriteLine("Couldn't find item {0} in inventory.", itemToDrop);
+            }
         }
 
         public void Look()
@@ -48,4 +65,4 @@ namespace Grupp4_Game
             //Look
         }
     }
-    }
+}

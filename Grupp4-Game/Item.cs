@@ -8,8 +8,8 @@ namespace Grupp4_Game
 {
     class Item
     {
-        string ItemName { get; set; }
-        string Description { get; set; }
+        public string ItemName { get; set; }
+        public string Description { get; set; }
         public Item(string itemname, string description)
         {
             this.ItemName = itemname;
