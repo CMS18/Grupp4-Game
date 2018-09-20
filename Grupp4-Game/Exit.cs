@@ -8,7 +8,18 @@ namespace Grupp4_Game
 {
     class Exit
     {
-        public bool Locked = true;
+        bool Locked { get; set;}
+        int DoorID { get; set; }
+
+        public Exit(bool Locked, int doorID)
+        {
+            this.Locked = Locked;
+            this.DoorID = doorID;
+           
+
+        }
+        
+
 
     }
 }

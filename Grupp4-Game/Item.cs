@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Grupp4_Game
 {
-    class Item
+    
+   class Item
     {
         string ItemName { get; set; }
         string Description { get; set; }
@@ -31,4 +32,6 @@ namespace Grupp4_Game
 
         //Weapon - Type
     }
+
+   
 }
