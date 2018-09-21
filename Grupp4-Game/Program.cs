@@ -11,7 +11,7 @@ namespace Grupp4_Game
         static void Main(string[] args)
         {
             WorldBuilder worldbuilder = new WorldBuilder();
-            worldbuilder.RoomCreator();
+          
             Game StartGame = new Game();
             //Anropa klasser samt Meny 
         }

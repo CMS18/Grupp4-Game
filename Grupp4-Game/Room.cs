@@ -11,16 +11,15 @@ namespace Grupp4_Game
         string RoomName { get; set; }
         string RoomDescription { get; set; }
 
-        public Room (string roomName, string roomDescription)
+       
         public List<Item> roomInventory = new List<Item>();
         public List<Exit> Exits = new List<Exit>(); 
        
-        public Room (string room, string roomdescription) 
+        public Room (string roomName, string roomDescription) 
         {
             this.RoomName = roomName;
             this.RoomDescription = roomDescription;
-            this.RoomName = room.ToString();
-            this.RoomDescription = roomdescription;
+           
             
         }
       

@@ -13,6 +13,7 @@ namespace Grupp4_Game
         public WorldBuilder()
         {
             RoomCreator();
+            ItemCreator();
         }
         private void RoomCreator()
         {
@@ -24,7 +25,7 @@ namespace Grupp4_Game
             roomList.Add(livingRoom);
             roomList.Add(hall);
         }
-        private void ItemCreator()
+        private void ItemCreator() //Har hårdkodat här nedan
         {
             Player player = new Player("Bjrön");
 
