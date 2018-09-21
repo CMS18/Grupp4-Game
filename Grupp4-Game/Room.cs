@@ -18,7 +18,8 @@ namespace Grupp4_Game
         }
         List<Exit> Exits = new List<Exit>();  //ExitList : List<Exit>
         List<Item> RoomInventory = new List<Item>(); //RoomInventory List<item>
-       
+        
+
         public void ShowDescription()
         {
 
