@@ -8,6 +8,7 @@ namespace Grupp4_Game
 {
     class Room
     {
+        
         //Description
         //RoomInventory List<item>
         //ExitList : List<Exit>

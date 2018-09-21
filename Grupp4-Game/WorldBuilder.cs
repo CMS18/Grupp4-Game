@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace Grupp4_Game
 {
-    class Game
+    class WorldBuilder
     {
-        public Game()
+        public void RoomCreator()
         {
-            Console.WriteLine("");
+            Room livingRoom = new Room();
         }
-        //PlayerName
-        //RoomList
-        //Victory
-        //PlayingGame()
+
     }
 }
