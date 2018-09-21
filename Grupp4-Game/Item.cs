@@ -16,6 +16,7 @@ namespace Grupp4_Game
         {
             this.ItemName = itemname;
             this.Description = description;
+           
         }
         public Item (string itemname, string description, int keyID) // tre parametrar om nyckel
         {
@@ -34,20 +35,12 @@ namespace Grupp4_Game
         {
             //Inspect()
 
-        //Name
-        //Description
-        //Use()
-        //Inspect()
-
         }
 
         //Key - HouseKey
 
         //Weapon - Type
-        public Item()
-        {
-
-        }
+      
 
         public string itemName1(string beerCan)
         {
@@ -55,11 +48,6 @@ namespace Grupp4_Game
             beerCan = userInput;
             return beerCan;
         }
-
-
-
-
-    }
-
-   
-}
+        
+    } // class
+} //namespace

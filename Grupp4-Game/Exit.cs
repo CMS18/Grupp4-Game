@@ -11,6 +11,7 @@ namespace Grupp4_Game
         bool Locked { get; set;}
         int DoorID { get; set; }
         int KeyID { get; set; }
+        
 
         public Exit(bool Locked, int doorID, int keyID)
         {
@@ -24,7 +25,5 @@ namespace Grupp4_Game
             this.DoorID = doorID;
         }
         
-
-
-    }
-}
+    } //class
+} //namespace

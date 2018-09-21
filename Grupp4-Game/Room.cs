@@ -10,31 +10,33 @@ namespace Grupp4_Game
     {
         string RoomName { get; set; }
         string RoomDescription { get; set; }
-
-        public Room (string roomname, string roomdescription)
-        {
-            this.RoomName = roomname;
-            this.RoomDescription = roomdescription;
-        }
-        List<Exit> Exits = new List<Exit>();  //ExitList : List<Exit>
-        List<Item> RoomInventory = new List<Item>(); //RoomInventory List<item>
+        public List<Item> roomInventory = new List<Item>(); //Room items, varför read-only? går ej att fylla
+        public List<Exit> Exits = new List<Exit>();  //Exit list, samma sak med denna
        
+        public Room (string room, string roomdescription) 
+        {
+            this.RoomName = room.ToString();
+            this.RoomDescription = roomdescription;
+            
+        }
+      
         public void ShowDescription()
         {
-
+            Console.WriteLine(this.RoomDescription);
         }
         public void Inspect ()
         {
+            ShowDescription();
+            Console.WriteLine("Rummets inventory: ");
+            foreach (Item item in roomInventory)
+            {
+                Console.WriteLine(item.ItemName);
+            }
 
+         
         }
-       
-        
-        //Description
-        //RoomInventory List<item>
-        //ExitList : List<Exit>
-        //ShowDiscription()
-        //Inspect()
 
         //Exit
-    }
-}
+
+    }//Class
+}//namespace

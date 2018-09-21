@@ -10,20 +10,10 @@ namespace Grupp4_Game
     {
         static void Main(string[] args)
         {
-            
+            WorldBuilder worldbuilder = new WorldBuilder();
+            worldbuilder.RoomCreator();
             Game StartGame = new Game();
-
-            //WorldBuilder??
-            Item key = new Item("Nyckel", "Nyckel till dörr 1", 1);
-            Item key2 = new Item("Nyckel2", "Nyckel till dörr 2", 2);
-            Player player = new Player("Bjrön");
-            Exit Door = new Exit(true,1, 1); //låst, ID 1
-            Exit Door2 = new Exit(true, 2, 2);
-            Exit Door3 = new Exit(false, 3);
-            Room Kitchen = new Room("Kitchen", "beskrivnning");
-            Exit Door = new Exit();
-
             //Anropa klasser samt Meny 
         }
-    }
-}
+    } // class
+} //namespace
