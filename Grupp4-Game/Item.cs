@@ -12,6 +12,7 @@ namespace Grupp4_Game
         public string ItemName { get; set; }
         public string Description { get; set; }
         public int KeyID { get; set; }
+
         public Item(string itemname, string description) // två parametrar
         {
             this.ItemName = itemname;
@@ -40,14 +41,5 @@ namespace Grupp4_Game
         //Key - HouseKey
 
         //Weapon - Type
-      
-
-        public string itemName1(string beerCan)
-        {
-            string userInput = Console.ReadLine();
-            beerCan = userInput;
-            return beerCan;
-        }
-        
-    } // class
-} //namespace
+    }
+}
