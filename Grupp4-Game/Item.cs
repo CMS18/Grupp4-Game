@@ -27,9 +27,13 @@ namespace Grupp4_Game
 
         }
 
-        public void Use()
+        public void UseKey(Item key, Exit door) 
         {
-            
+            if (key.KeyID == door.DoorID)
+            {
+                Console.WriteLine("Nyckeln passar");
+            }
+            else Console.WriteLine("Nyckeln passar inte");
         }
 
         public void Inspect ()

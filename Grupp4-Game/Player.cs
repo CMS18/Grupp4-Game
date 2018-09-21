@@ -10,11 +10,7 @@ namespace Grupp4_Game
     {
         public string Name { get; set; }
         List<Item> inventoryList = new List<Item>(); //InventoryList
-       public int[,] currentPosition/*Room*/ = new int[3, 2]; //tvådimensionell array för position?
-
-        /* Hur ska player navigeras mellan rummen? ideer?
-         Skulle vara bra att typ kunna koppla currentPosition till rummen så man
-         kan använda (currentRoom.inventory) för att ta bort föremålen ur rummen */
+        public Room currentPosition { get; set; }
 
         public Player(string name)
         {
@@ -25,7 +21,8 @@ namespace Grupp4_Game
        
         public void PickUpItem(Item item) //skickar in ett Item
         {
-           /* currentroom.inventory remove...*/
+            /* currentroom.inventory remove...*/
+            
             inventoryList.Add(item); //lägger till item i player inventory
             Console.WriteLine("Du plockade upp {0} till din inventory", item.ItemName);
             ShowInventory(); 
@@ -35,7 +32,7 @@ namespace Grupp4_Game
         public void ShowInventory()
         {
             Console.WriteLine("Din inventory:");
-            foreach (Item item in inventoryList)
+            foreach (var item in inventoryList)
             {
                 Console.WriteLine(item.ItemName);
             }
@@ -46,14 +43,14 @@ namespace Grupp4_Game
 
         }
 
-        public void UseItem(Item item)
+        public void UseItem(Item item, Exit itemtwo)
         {
             
         }
 
         public void Move()
         {
-            //Move()
+            
         }
 
         public void DropItem(Item itemToDrop)
