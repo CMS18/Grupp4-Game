@@ -11,30 +11,17 @@ namespace Grupp4_Game
     {
         public string ItemName { get; set; }
         public string Description { get; set; }
-        public int KeyID { get; set; }
+        public string Examine { get; set; }
 
-        public Item(string itemname, string description) // två parametrar
+        public Item(string itemname, string description, string examine)
         {
             this.ItemName = itemname;
             this.Description = description;
-           
+            this.Examine = examine;
         }
-        public Item (string itemname, string description, int keyID) // tre parametrar om nyckel
-        {
-            this.ItemName = itemname;
-            this.Description = description;
-            this.KeyID = keyID;
+    
 
-        }
-
-        public void UseKey(Item key, Exit door) 
-        {
-            if (key.KeyID == door.DoorID)
-            {
-                Console.WriteLine("Nyckeln passar");
-            }
-            else Console.WriteLine("Nyckeln passar inte");
-        }
+        
 
         public void Inspect ()
         {
@@ -45,5 +32,25 @@ namespace Grupp4_Game
         //Key - HouseKey
 
         //Weapon - Type
+    }
+
+    class Key : Item
+    {
+        public int KeyID { get; set; }
+
+        public Key(string itemname, string description, string examine, int keyID) : base(itemname, description, examine)
+        {
+            this.ItemName = itemname;
+            this.Description = description;
+        }
+
+        public void UseKey(Key key, Exit door)
+        {
+            if (key.KeyID == door.DoorID)
+            {
+                Console.WriteLine("Nyckeln passar");
+            }
+            else Console.WriteLine("Nyckeln passar inte");
+        }
     }
 }

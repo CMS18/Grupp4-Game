@@ -11,16 +11,16 @@ namespace Grupp4_Game
         bool Locked { get; set;}
         public int DoorID { get; set; }
         public Room LeadsTo { get; set;}
-      
-        
-        public Exit(bool Locked, int doorID, Room leadsTo)
+        public string DoorDescription { get; set; }
+
+        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo)
         {
             this.Locked = Locked;
             this.DoorID = doorID;
             this.LeadsTo = leadsTo;
+            DoorDescription = doorDescription;
            
         }
-      
 
         public void Inspect()
         {

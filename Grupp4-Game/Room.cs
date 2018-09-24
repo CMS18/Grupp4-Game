@@ -10,23 +10,36 @@ namespace Grupp4_Game
     {
         string RoomName { get; set; }
         string RoomDescription { get; set; }
+        public int[] ArrayPosition { get; set; }
+        //private Dictionary<Direction, Room> Exits1 { get => exits1; set => exits1 = value; }
 
-       
         public List<Item> roomInventory = new List<Item>();
-        public List<Exit> Exits = new List<Exit>(); 
-       
-        public Room (string roomName, string roomDescription) 
+        public List<Exit> Exits = new List<Exit>();
+
+        enum Direction
+        {
+            North,
+            South,
+            West,
+            East,
+            Up,
+            Down
+        }
+        public Dictionary<Direction, Room> exits1 = new Dictionary<Direction, Room>();
+
+        public Room (string roomName, string roomDescription, int[] arrayPosition) 
         {
             this.RoomName = roomName;
             this.RoomDescription = roomDescription;
-           
-            
-        }
-      
-        public void ShowDescription()
+            ArrayPosition = arrayPosition;
+
+    }
+
+    public void ShowDescription()
         {
             Console.WriteLine(this.RoomDescription);
         }
+
         public void Inspect ()
         {
             ShowDescription();
@@ -35,11 +48,7 @@ namespace Grupp4_Game
             {
                 Console.WriteLine(item.ItemName);
             }
-
-         
         }
-
         //Exit
-
     }//Class
 }//namespace
