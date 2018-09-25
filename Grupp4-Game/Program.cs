@@ -10,9 +10,12 @@ namespace Grupp4_Game
     {
         static void Main(string[] args)
         {
-            WorldBuilder worldbuilder = new WorldBuilder();
+           
           
             Game StartGame = new Game();
+            StartGame.TakeUserInput();
+            
+
             //Anropa klasser samt Meny 
         }
     } // class

@@ -10,28 +10,25 @@ namespace Grupp4_Game
    class Item
     {
         public string ItemName { get; set; }
-        public string Description { get; set; }
+        public string DroppedDescription { get; set; }
         public string Examine { get; set; }
 
         public Item(string itemname, string description, string examine)
         {
             this.ItemName = itemname;
-            this.Description = description;
+            this.DroppedDescription = description;
             this.Examine = examine;
         }
     
 
         
 
-        public void Inspect ()
+        public void ExamineItem ()
         {
-            //Inspect()
+            Console.WriteLine(this.Examine);
 
         }
 
-        //Key - HouseKey
-
-        //Weapon - Type
     }
 
     class Key : Item
@@ -41,7 +38,7 @@ namespace Grupp4_Game
         public Key(string itemname, string description, string examine, int keyID) : base(itemname, description, examine)
         {
             this.ItemName = itemname;
-            this.Description = description;
+            this.DroppedDescription = description;
         }
 
         public void UseKey(Key key, Exit door)

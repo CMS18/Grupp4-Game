@@ -8,17 +8,19 @@ namespace Grupp4_Game
 {
     class Exit
     {
-        bool Locked { get; set;}
+       public bool Locked { get; set;}
+       public string Direction { get; set; }
         public int DoorID { get; set; }
         public Room LeadsTo { get; set;}
         public string DoorDescription { get; set; }
 
-        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo)
+        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction)
         {
             this.Locked = Locked;
             this.DoorID = doorID;
             this.LeadsTo = leadsTo;
-            DoorDescription = doorDescription;
+           this.DoorDescription = doorDescription;
+            this.Direction = direction;
            
         }
 
