@@ -12,6 +12,8 @@ namespace Grupp4_Game
         public List<Item> inventoryList = new List<Item>(); //InventoryList
         public Room currentPosition { get; set; }
 
+
+
         public Player(string name)
         {
             this.Name = name;
@@ -20,13 +22,22 @@ namespace Grupp4_Game
 
 
 
-        public void PickUpItem(Item item) //skickar in ett Item
+        public void PickUpItem(List<string> userinput)
         {
-            /* currentroom.inventory remove...*/
+            foreach (var word in userinput)
+            {
 
-            inventoryList.Add(item); //lägger till item i player inventory
-            Console.WriteLine("Du plockade upp {0} till din inventory", item.ItemName);
-            ShowInventory();
+                foreach (var item in currentPosition.roomInventory)
+                {
+                    if (item.ItemName.ToLower().Contains(word.ToLower()))
+                    {
+                        Console.WriteLine("You picked up " + item.ItemName);
+                        currentPosition.roomInventory.Remove(item);
+                        inventoryList.Add(item);
+                        break;
+                    }
+                }
+            }
 
         }
 
@@ -39,15 +50,30 @@ namespace Grupp4_Game
             }
             if (inventoryList.Count == 0) // om inventoryn är tom
             {
-                Console.WriteLine("Din inventory är tom");
+                Console.WriteLine("Your inventory is empty, pick up something");
             }
 
         }
 
-        public void UseItem(Item item, Exit itemtwo)
+        public void UseItem(List<string> userinput)
         {
+          /*
+                foreach (Item item in inventoryList) //för varje item i inventory
+                {
+                if (userinput.Contains(item.ItemName))
+                {
+                    
+                }
+                    if (item.ItemName.Contains(word)) //om itemnamn innehåller ordet från userinput
+                    {
+                        //kolla om föremålet är användbart
+                        //
+                    }
 
+                }*/
+           
         }
+
 
         public void Move(List<string> userInput)
         {
@@ -55,7 +81,7 @@ namespace Grupp4_Game
 
             foreach (string word in userInput)
             {
-                if (word.ToLower() == "north" || word.ToLower() == "west" || word.ToLower() == "south" || word.ToLower() == "east")
+                if (word.ToLower() == "forward" || word.ToLower() == "left" || word.ToLower() == "back" || word.ToLower() == "right")
                 {
                     direction = word.ToLower();
                 }
@@ -64,98 +90,145 @@ namespace Grupp4_Game
 
             switch (direction)
             {
-
-                case "north":
-                    foreach (var exit in currentPosition.Exits)
+                case "forward":
+                    foreach (Exit exit in currentPosition.Exits)
                     {
-                        if (exit.Direction == "NORTH")
+                        if (exit.Direction == direction)
                         {
                             if (exit.Locked == false)
                             {
+                                currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-                                break;
-                            }
-                            else Console.WriteLine("This door is locked, info: " + exit.DoorDescription);
-                        }
 
+                                Console.Write("Moved to ");
+                                currentPosition.PrintRoomName();
+                                return;
+                            }
+                            else
+                            {
+                                Console.WriteLine(exit.lockedInfo);
+                                return;
+                            }
+                        }
+                        else continue;
                     }
+                    Console.WriteLine("No exit this way");
                     break;
 
-                case "south":
-                    foreach (var exit in currentPosition.Exits)
+
+                case "back":
+                    foreach (Exit exit in currentPosition.Exits)
                     {
-                        if (exit.Direction == "SOUTH")
+                        if (exit.Direction == direction)
                         {
                             if (exit.Locked == false)
                             {
+                                currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-
+                                Console.Write("Moved to ");
+                                currentPosition.PrintRoomName();
+                                return;
                             }
-                            else Console.WriteLine("This door is locked, info: ", exit.DoorDescription);
+                            else
+                            {
+                                Console.WriteLine(exit.lockedInfo);
+                                return;
+                            }
                         }
+                        else continue;
                     }
+                    Console.WriteLine("No exit this way");
                     break;
 
-                case "east":
-                    foreach (var exit in currentPosition.Exits)
+
+
+
+                case "right":
+                    foreach (Exit exit in currentPosition.Exits)
                     {
-                        if (exit.Direction == "EAST")
+                        if (exit.Direction == direction)
                         {
                             if (exit.Locked == false)
                             {
+                                currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-
+                                Console.Write("Moved to ");
+                                currentPosition.PrintRoomName();
+                                return;
                             }
-                            else Console.WriteLine("This door is locked, info: ", exit.DoorDescription);
+                            else
+                            {
+                                Console.WriteLine(exit.lockedInfo);
+                                return;
+                            }
                         }
+                        else continue;
                     }
+                    Console.WriteLine("No exit this way");
                     break;
 
-                case "west":
-                    foreach (var exit in currentPosition.Exits)
+                case "left":
+                    foreach (Exit exit in currentPosition.Exits)
                     {
-                        if (exit.Direction == "WEST")
+                        if (exit.Direction == direction)
                         {
                             if (exit.Locked == false)
                             {
+                                currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-
+                                Console.Write("Moved to ");
+                                currentPosition.PrintRoomName();
+                                return;
                             }
-                            else Console.WriteLine("This door is locked, info: ", exit.DoorDescription);
+                            else
+                            {
+                                Console.WriteLine(exit.lockedInfo);
+                                return;
+                            }
                         }
+                        else continue;
                     }
+                    Console.WriteLine("No exit this way");
                     break;
 
                 default:
-                    Console.WriteLine("No exit this way");
-                    Console.Write("Exits: ");
-                    foreach (var exit in currentPosition.Exits)
-                    {
-                        Console.Write(exit.DoorDescription + ", ");
-
-                    }
+                    DefaultAction();
                     break;
             }
         }
+        void DefaultAction()
+        {
+            Console.WriteLine("No exit this way");
+            Console.Write("Exits: ");
+            foreach (var exit in currentPosition.Exits)
+            {
+                Console.Write(exit.DoorDescription + ", ");
 
-        public void DropItem(Item itemToDrop)
+            }
+        }
+        public void DropItem(List<string> userinput)
         {
 
-            foreach (Item item in inventoryList)
+            foreach (var word in userinput)
             {
-                if (inventoryList.Contains(itemToDrop)) //om listan innehåller itemet
+                foreach (var item in inventoryList)
                 {
-                    Console.WriteLine("Dropped item {0}.", item.ItemName);
-                    inventoryList.Remove(item);
-                    break;
 
+                    if (item.ItemName.ToLower().Contains(word.ToLower())) //om listan innehåller 
+                    {
+                        Console.WriteLine("Dropped item {0}.", item.ItemName);
+                        inventoryList.Remove(item);
+                        break;
+
+                    }
+
+                    else if (!inventoryList.Contains(item)) // om listan inte innehåller itemet
+                    {
+                        Console.WriteLine("Couldn't find item {0} in inventory.", item.ItemName);
+                    }
                 }
-                else if (!inventoryList.Contains(itemToDrop)) // om listan inte innehåller itemet
-                {
-                    Console.WriteLine("Couldn't find item {0} in inventory.", itemToDrop.ItemName);
-                }
+
             }
-
         }
 
         public void Look()

@@ -9,10 +9,12 @@ namespace Grupp4_Game
     class Exit
     {
        public bool Locked { get; set;}
+        public string lockedInfo = "This door is locked, needs some kind of key";
        public string Direction { get; set; }
         public int DoorID { get; set; }
         public Room LeadsTo { get; set;}
         public string DoorDescription { get; set; }
+     
 
         public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction)
         {

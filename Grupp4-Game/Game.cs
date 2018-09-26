@@ -10,6 +10,7 @@ namespace Grupp4_Game
     {
         Player player = new Player("NAMN");
 
+
         Room hallway;
         Room kitchen;
         Room outdoor;
@@ -19,18 +20,17 @@ namespace Grupp4_Game
         Item outKey;
         Item kitchenKey;
         Item knife;
-        Item beerCan;
+        Item beercan;
         Item beerKey;
         Item wineBottle;
-      
+        Item toilet;
+
 
         bool GameisActive { get; set; }
-
         public List<Room> Rooms { get; set; }
-
-
-        public string[,] map = new string[3, 3]; //array för möjliga vägar
-        public string[] actionArray = { "GO", "LOOK", "MOVE", "OPEN", "DROP", "TAKE", "USE", "EAST", "SOUTH", "NORTH", "WEST", "LEFT", "RIGHT", "FORWARD", "BACK" };
+        List<Item> roomInventory = new List<Item>();
+        List<Item> playerInventory = new List<Item>();
+        public string[] actionArray = { "GO", "LOOK", "MOVE", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT" };
 
         public Game()
         {
@@ -38,6 +38,7 @@ namespace Grupp4_Game
             InitializeItem();
             InitializePlayer();
             GameisActive = true;
+            player.currentPosition.ShowDescription();
         }
 
 
@@ -47,40 +48,46 @@ namespace Grupp4_Game
         {
             do
             {
-                player.currentPosition.ShowDescription();
-                // string userInput = Console.ReadLine();
+                if (player.currentPosition.Visited == false)
+                {
+                    player.currentPosition.ShowDescription();
+                }
+                
+                Console.Write("> ");
                 string[] userInput = Console.ReadLine().ToUpper().Split(' ');
-
-
+                resultlist = new List<string>(); //för att återställa listan vid nytt kommando
                 foreach (var word in userInput)
                 {
-                    foreach (var item in actionArray)
-                    {
-                        if (word == item)
-                        {
-                            resultlist.Add(word);
-                        }
-                    }
-
+                    resultlist.Add(word);
                 }
 
+                /*  foreach (var word in userInput)
+                  {
+                      foreach (var action in actionArray)
+                      {
+                          if (word == action)
+                          {
+                              resultlist.Add(word);
+                          }
+                      }
+                      foreach (Item item in player.currentPosition.roomInventory)
+                      {
+                          if (item.ItemName.ToLower().Contains(word.ToLower()))
+                          {
+                              resultlist.Add(word);
+                          }
+                      }
 
-                foreach (var word in resultlist)
-                {
-                    Console.WriteLine(word);
-                }
-                Console.ReadLine();
+                  }
+                  */
                 Switch(resultlist);
-
             }
             while (GameisActive);
         }
 
-
-
         public void Switch(List<string> userInput)
         {
-
+            
             foreach (var word in userInput)
             {
 
@@ -89,66 +96,76 @@ namespace Grupp4_Game
                     case "go":
                         player.Move(userInput);
                         break;
-
-                        case "look":
-                              player.currentPosition.ShowDescription();
-                              break;
-
-                         /* case "move":
-                              player.Move(userInput[1]);
-                              break;
-
-                          case "open":
-                              player.UseItem();
-                              break;*/
+                    case "move":
+                        player.Move(userInput);
+                        break;
+                    case "look":
+                        player.Look();
+                        break;
+                    case "take":
+                        player.PickUpItem(userInput);
+                        break;
+                    case "pick":
+                        player.PickUpItem(userInput);
+                        break;
+                    case "drop":
+                        player.DropItem(userInput);
+                        break;
+                    case "use":
+                        player.UseItem(userInput);
+                            break;
+                        /* case "open":
+                                player.UseItem();
+                                break;*/
                 }
             }
         }
         public void InitializePlayer()
         {
 
-            player.currentPosition = hallway;
+            player.currentPosition = livingRoom;
+            
         }
         public void InitializeRooms()
         {
             List<Room> roomList = new List<Room>();
 
-            hallway = new Room("Hall", "Beskrivning Hall"); //startposition
-            livingRoom = new Room("Living Room", "Beskrivning living room");
-            kitchen = new Room("Kitchen", "Beskrivning kitchen");
-            bathroom = new Room("Bathroom", "Beskrivning bathroom");
-            outdoor = new Room("Bedroom", "Beskrivning Bedroom");
-    
+            hallway = new Room("Hall", "Now you're in a big hallway where you see three doors, one to your right, one to your left and one infront of you.", false);
+            livingRoom = new Room("Living Room", "Waking up in a room you've never seen before, there's a white door in front of you.", true); //startposition
+            kitchen = new Room("Kitchen", "This room has a window!! Maybe you should try and break it.", false);
+            bathroom = new Room("Bathroom", "Gosh.. that smell.", false);
+            outdoor = new Room("Outdoor", "You are OUT", false);
+
             roomList.Add(livingRoom);
             roomList.Add(hallway);
             roomList.Add(kitchen);
             roomList.Add(bathroom);
             roomList.Add(outdoor);
-           
+
             #region Fyller rummen med Exits
             hallway.Exits = new List<Exit>
             {
-                { new Exit("Slightly less mysterious white door (SOUTH)", false, 1, livingRoom, "SOUTH") },
-                { new Exit("Kitchen door (NORTH)", false, 2, kitchen, "NORTH") },
-                { new Exit("Stinky bathroom door (EAST)", false, 3, bathroom, "EAST") },
-                { new Exit("Outdoor (WEST)", false, 4, outdoor, "WEST") }
+                { new Exit("Slightly less mysterious white door (BACK)", false,1, livingRoom, "back") },
+                { new Exit("Kitchen door (FORWARD)", true, 2, kitchen, "forward") },
+                { new Exit("Stinky bathroom door (RIGHT)", false, 3, bathroom, "right") },
+                { new Exit("Outdoor (LEFT)", true, 4, outdoor, "left") }
             };
             livingRoom.Exits = new List<Exit>
             {
-                { new Exit("Mysterious white door (NORTH)", true, 1, hallway, "NORTH") }
+                { new Exit("Mysterious white door (FORWARD)", false, 1, hallway, "forward") }
             };
 
             kitchen.Exits = new List<Exit>
             {
-                { new Exit("Hall door (SOUTH)", false, 2, hallway, "SOUTH") }
+                { new Exit("Hall door (BACK)", false, 2, hallway, "back") }
             };
 
             bathroom.Exits = new List<Exit>
             {
-                {new Exit("Hall door (WEST)", false, 3, hallway, "WEST") }
+                {new Exit("Hall door (WEST)", false, 3, hallway, "left") }
             };
 
-          
+
             #endregion
 
 
@@ -157,22 +174,25 @@ namespace Grupp4_Game
 
         public void InitializeItem()
         {
-            outKey = new Key("House key", " On the floor lies a key, I get a sense of freedom when I see it."," I think this key will help me get my butt outside this house", 4) ;
-            kitchenKey = new Key("Kitchen key", " I see something shiny among the pieces of brown bits in the toilet.", "I'd rather not examine this any further.", 2);
-            knife = new Item("Sharp Knife", " I see a shiny knife on the floor. On the side I read \"MORAKNIV\"", "Maybe I can use this on something to create something new");
-            beerCan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this ");
+            outKey = new Key("Housekey", " On the floor lies a key, I get a sense of freedom when I see it.", " I think this key will help me get my butt outside this house", 4);
+            kitchenKey = new Key("Kitchen key", "", "I'd rather not examine this any further.", 2);
+            knife = new Item("Knife", " I see a shiny sharp knife on the floor. On the side I read \"MORAKNIV\".", "Maybe I can use this on something to create something new");
+            beercan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this ");
             beerKey = new Key("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1);
-            wineBottle = new Item("Wine bottle", " I see a winebottle.", "Maybe I can drink this and forget about my sorrows");
+            wineBottle = new Item("Winebottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can break something with it");
+            toilet = new Item("Toilet", " I see an unflushed toilet, who would do such a thing. It looks like there's something in it. ", "While inspecting the disgusting toilet I see a key, dare I take it?");
+
 
             livingRoom.roomInventory.Add(knife);
-            livingRoom.roomInventory.Add(beerCan);
+            livingRoom.roomInventory.Add(beercan);
             bathroom.roomInventory.Add(kitchenKey);
+            bathroom.roomInventory.Add(toilet);
             kitchen.roomInventory.Add(outKey);
-            hallway.roomInventory.Add(wineBottle);
+            kitchen.roomInventory.Add(wineBottle);
 
 
         }
-       
+
 
     } //class
 } //namespace 

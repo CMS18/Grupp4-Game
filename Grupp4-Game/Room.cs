@@ -10,6 +10,7 @@ namespace Grupp4_Game
     {
         string RoomName { get; set; }
         string RoomDescription { get; set; }
+        public bool Visited { get; set; }
 
 
         public List<Item> roomInventory = new List<Item>();
@@ -17,15 +18,26 @@ namespace Grupp4_Game
 
 
 
-        public Room(string roomName, string roomDescription)
+        public Room(string roomName, string roomDescription, bool visited)
         {
             this.RoomName = roomName;
             this.RoomDescription = roomDescription;
+            this.Visited = visited;
+        }
+
+        public void PrintRoomName()
+        {
+            Console.WriteLine(this.RoomName);
         }
 
         public void ShowDescription()
         {
-            Console.WriteLine(this.RoomDescription);
+            Console.Write(this.RoomDescription);
+            foreach (var item in roomInventory)
+            {
+                Console.Write(item.DroppedDescription);
+            }
+            Console.WriteLine();
         }
 
         public void Inspect()
