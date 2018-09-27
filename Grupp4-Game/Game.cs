@@ -30,8 +30,8 @@ namespace Grupp4_Game
         public List<Room> Rooms { get; set; }
         List<Item> roomInventory = new List<Item>();
         List<Item> playerInventory = new List<Item>();
-        public string[] actionArray = { "GO", "LOOK", "MOVE", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT" };
-
+        public string[] actionArray = { "GO", "LOOK", "MOVE", "SHOW", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT" };
+        public string userinput;
         public Game()
         {
             InitializeRooms();
@@ -79,32 +79,47 @@ namespace Grupp4_Game
                               resultlist.Add(word);
                           }
                       }
+              
+                while (true)
+                {
+                    Console.WriteLine("");
+                    Console.Write("> ");
+                    userinput = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(userinput) || int.TryParse(userinput, out int wrong))
+                    {
+                        Console.WriteLine("Only letters please");
+                    }
+                    else
+                    break;
+                }
+                string[] userInput = userinput.ToUpper().Split(' ');
 
-                  }
-                  */
-                Switch(resultlist);
+                Switch(userInput);
             }
             while (GameisActive);
         }
 
-        public void Switch(List<string> userInput)
+
+        public void Switch(string[] userInput)
         {
 
             foreach (var word in userInput)
             {
-
                 switch (word.ToLower())
                 {
                     case "go":
-                        player.Move(userInput);
+                        player.Move(userInput.ToList());
                         break;
                     case "move":
-                        player.Move(userInput);
+                        player.Move(userInput.ToList());
                         break;
                     case "look":
                         player.Look();
                         break;
                     case "take":
+                        player.PickUpItem(userInput);
+                        break;
+                    case "get":
                         player.PickUpItem(userInput);
                         break;
                     case "pick":
@@ -116,16 +131,32 @@ namespace Grupp4_Game
                     case "use":
                         player.UseItem(userInput);
                         break;
-                        /* case "open":
-                                player.UseItem();
-                                break;*/
+                    case "examine":
+                        player.ExamineItem(userInput);
+                        break;
+                    case "inspect":
+                        player.ExamineItem(userInput);
+                        break;
+                    case "show":
+                        player.ShowInventory();
+                        break;
+
+                    /* case "open":
+                            player.UseItem();
+                            break;*/
+                    default:
+                        Console.WriteLine("Sorry didn't understand that command..");
+                        Console.WriteLine("Try again.");
+                        break;
                 }
+                break;
             }
+            
         }
         public void InitializePlayer()
         {
 
-            player.currentPosition = livingRoom;
+            player.currentPosition = livingRoom; //startposition
 
         }
         public void InitializeRooms()
@@ -156,17 +187,17 @@ namespace Grupp4_Game
             };
             livingRoom.Exits = new List<Exit>
             {
-                { new Exit("Mysterious white door (FORWARD)", false, 1, hallway, "forward") }
+                { new Exit("Mysterious white door (FORWARD)", true, 1, hallway, "forward", "door") }
             };
 
             kitchen.Exits = new List<Exit>
             {
-                { new Exit("Hall door (BACK)", false, 2, hallway, "back") }
+                { new Exit("Hall door (BACK)", false, 2, hallway, "back", "door") }
             };
 
             bathroom.Exits = new List<Exit>
             {
-                {new Exit("Hall door (WEST)", false, 3, hallway, "left") }
+                {new Exit("Hall door (WEST)", false, 3, hallway, "left","door") }
             };
 
 
@@ -174,7 +205,6 @@ namespace Grupp4_Game
 
             Rooms = roomList;
         }
-
         public void InitializeItem()
         {
             #region Skapar upp alla items.
