@@ -118,6 +118,7 @@ namespace Grupp4_Game
                         Console.WriteLine("Try again.");
                         break;
                 }
+                break;
             }
             
         }
