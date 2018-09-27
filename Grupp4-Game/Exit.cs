@@ -9,36 +9,34 @@ namespace Grupp4_Game
     class Exit
     {
         public bool Locked { get; set;}
-        public string lockedInfo = "This door is locked, needs some kind of key";
+        public string lockedInfo = "Door handle wont budge, i need a key to unlock this door.";
         public string Direction { get; set; }
         public int DoorID { get; set; }
-        public string LockType { get; set; }
         public Room LeadsTo { get; set;}
         public string DoorDescription { get; set; }
-     
 
-        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction, string Locktype)
+
+        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction)
         {
             this.Locked = Locked;
             this.DoorID = doorID;
             this.LeadsTo = leadsTo;
-           this.DoorDescription = doorDescription;
+            this.DoorDescription = doorDescription;
             this.Direction = direction;
-            this.LockType = Locktype;
            
         }
 
-        public void Inspect()
-        {
-            if (this.Locked)
-            {
-                Console.WriteLine("Den här dörren är låst");
-            }
-            else
-            {
-                Console.WriteLine("Du kan öppna den här dörren");
-            }
-        }
+        //public void Inspect()
+        //{
+        //    if (this.Locked)
+        //    {
+        //        Console.WriteLine("This door ");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Du kan öppna den här dörren");
+        //    }
+        //}
         
     } //class
 } //namespace

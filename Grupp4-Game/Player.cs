@@ -8,7 +8,6 @@ namespace Grupp4_Game
 {
     class Player
     {
-
         public string Name { get; set; }
         public List<Item> inventoryList = new List<Item>(); //InventoryList
         public Room currentPosition { get; set; }
@@ -20,15 +19,26 @@ namespace Grupp4_Game
 
         public void PickUpItem(string[] userinput)
         {
-            foreach (var item in currentPosition.roomInventory)
+            bool success = false;
+
+            foreach (var word in userinput)
             {
-                if (userinput.Contains(item.itemType.ToUpper()))
+                foreach (var item in currentPosition.roomInventory)
                 {
-                    Console.WriteLine("You picked up " + item.ItemName);
-                    currentPosition.roomInventory.Remove(item);
-                    inventoryList.Add(item);
-                    break;
+                    if (item.ItemName.ToLower().Contains(word.ToLower()))
+                    {
+                        Console.WriteLine("You picked up " + item.ItemName);
+                        currentPosition.roomInventory.Remove(item);
+                        inventoryList.Add(item);
+                        success = true;
+                        break;
+                    }
                 }
+            }
+            if(success == false)
+            {
+                Console.WriteLine("Can't pick up that");
+
             }
         }
 
@@ -43,17 +53,14 @@ namespace Grupp4_Game
             {
                 Console.WriteLine("Your inventory is empty, pick up something");
             }
-
         }
+
         public void ExamineItem(string[] userinput) //titta närmre på föremål
         {
             foreach (var roomitem in currentPosition.roomInventory) //för varje rumsitem
             {
                 if (userinput.Contains(roomitem.ItemName.ToUpper())) //om itemet är i rummet
                 {
-                    Console.WriteLine("(Taken.)"); //----------------toaletten ska inte kunna tas här
-                    inventoryList.Add(roomitem);
-                    currentPosition.roomInventory.Remove(roomitem);
                     Console.WriteLine(roomitem.Examine);
                     break;
                 }
@@ -67,6 +74,15 @@ namespace Grupp4_Game
                     }
                 }
             }
+
+            foreach (var roomProp in currentPosition.RoomProps)
+            {
+                if (userinput.Contains(roomProp.ItemName.ToUpper())) //om itemet är i rummet
+                {
+                    Console.WriteLine(roomProp.Examine);
+                    break;
+                }
+            }
         }
 
         public void Look() //titta i rummet
@@ -77,11 +93,11 @@ namespace Grupp4_Game
             {
                 Console.Write(exit.DoorDescription + ". ");
             }
-
         }
+
         public void CreateKey()
         {
-            Item beerKey = new Item("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1, "key");
+            Item beerKey = new Key("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1);
             inventoryList.Add(beerKey);
         }
 
@@ -89,48 +105,54 @@ namespace Grupp4_Game
         {
             foreach (var item in inventoryList)
             {
-                if (userinput.Contains(item.itemType.ToUpper()))
+                if (userinput.Contains(item.ItemName.ToUpper()))
                 {
-                    if (item.ItemName == "winebottle")
+                    if (item.ItemName == "wine" || item.ItemName == "bottle")
                     {
                         //fredrik kommer och frågar om pussel
                     }
 
                     foreach (var exit in currentPosition.Exits)
                     {
-                        if (userinput.Contains(exit.LockType.ToUpper()))
+                        if (userinput.Contains(exit.DoorDescription.ToUpper()))
                         {
-                            if (exit.DoorID == item.KeyID)
-                            {
-                                exit.Locked = false;
-                                Console.WriteLine("Unlocked.");
-                                inventoryList.Remove(item);
-                                return;
-                            }
+                            //if (exit.DoorID == item.KeyID)
+                            //{
+                            //    exit.Locked = false;
+                            //    Console.WriteLine("Unlocked.");
+                            //    inventoryList.Remove(item);
+                            //}
                         }
                     }
-
-                    foreach (var inventoryitem in inventoryList) //om item på annat item
-                    {
-                        if (inventoryitem.ItemName == item.ItemName) //om samma item så ta nästa
-                        { continue; }
-
-                        if (userinput.Contains(inventoryitem.itemType.ToUpper()))
-                        {
-                            if (inventoryitem.MatchId == item.MatchId)
-                            {
-                                inventoryList.Remove(item);
-                                inventoryList.Remove(inventoryitem);
-                                CreateKey();
-                                Console.WriteLine("You created a key");
-                                return;
-                            }
-                        }
-                    }
-                    Console.WriteLine("Cannot use this");
                 }
             }
-            Console.WriteLine("non such thing in your inventory");
+        }
+
+        void DefaultAction()
+        {
+            Console.WriteLine("No exit that way.");
+            Console.Write("I see the following exits: ");
+
+            string comma = (currentPosition.Exits.Count == 1) ? "" : ", ";
+            foreach (var exit in currentPosition.Exits)
+            {
+                Console.Write(exit.DoorDescription + comma);
+            }
+            Console.WriteLine(".");
+        }
+
+        public void Move(string[] userInput)
+        {
+            string direction = "";
+
+            foreach (string word in userInput)
+            {
+                if (word == "forward" || word == "left" || word == "back" || word == "right")
+                {
+                    direction = word.ToLower();
+                }
+            }
+            CheckDirection(direction); //istället för switch-case
         }
 
         public void CheckDirection(string direction) //istället för switch-case för direction
@@ -141,7 +163,6 @@ namespace Grupp4_Game
                 {
                     if (exit.Locked == false)
                     {
-                        currentPosition.Visited = true;
                         currentPosition = exit.LeadsTo;
 
                         Console.Write("Moved to ");
@@ -156,35 +177,19 @@ namespace Grupp4_Game
                 }
                 else continue;
             }
-            Console.WriteLine("No exit this way");
-        }
-
-        public void Move(List<string> userInput)
-        {
-            string direction = "";
-
-            foreach (string word in userInput)
-            {
-                if (word == "FORWARD" || word == "LEFT" || word == "BACK" || word == "RIGHT")
-                {
-                    direction = word.ToLower();
-                }
-            }
-            CheckDirection(direction); //istället för switch-case
-
+            DefaultAction();
         }
 
         public void DropItem(string[] userinput)
         {
             foreach (var item in inventoryList)
             {
-                if (userinput.Contains(item.itemType.ToUpper())) //om listan innehåller 
+                if (userinput.Contains(item.ItemName.ToUpper())) //om listan innehåller 
                 {
                     Console.WriteLine("Dropped item {0}.", item.ItemName);
                     inventoryList.Remove(item);
                     currentPosition.roomInventory.Add(item);
                     break;
-
                 }
 
                 else if (!inventoryList.Contains(item)) // om listan inte innehåller itemet
@@ -192,12 +197,7 @@ namespace Grupp4_Game
                     Console.WriteLine("Couldn't find item {0} in inventory.", item.ItemName);
                 }
             }
-
-
         }
-
-
-
     } //class
 } //namespace
 
