@@ -12,19 +12,17 @@ namespace Grupp4_Game
         public string lockedInfo = "This door is locked, needs some kind of key";
         public string Direction { get; set; }
         public int DoorID { get; set; }
-        public string LockType { get; set; }
         public Room LeadsTo { get; set;}
         public string DoorDescription { get; set; }
-     
 
-        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction, string Locktype)
+
+        public Exit(string doorDescription, bool Locked, int doorID, Room leadsTo, string direction)
         {
             this.Locked = Locked;
             this.DoorID = doorID;
             this.LeadsTo = leadsTo;
-           this.DoorDescription = doorDescription;
+            this.DoorDescription = doorDescription;
             this.Direction = direction;
-            this.LockType = Locktype;
            
         }
 

@@ -10,7 +10,6 @@ namespace Grupp4_Game
     {
         Player player = new Player("NAMN");
 
-
         Room hallway;
         Room kitchen;
         Room outdoor;
@@ -25,15 +24,15 @@ namespace Grupp4_Game
         Item wineBottle;
         RoomProp toilet;
 
-
         bool GameisActive { get; set; }
         public List<Room> Rooms { get; set; }
         List<Item> roomInventory = new List<Item>();
         List<Item> playerInventory = new List<Item>();
-        public string[] actionArray = { "GO", "LOOK", "MOVE", "SHOW", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT" };
+        public string[] actionArray = { "GO", "LOOK", "MOVE", "SHOW", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT"};
         public string userinput;
         public Game()
         {
+            Console.Title = "A hungover adventure";
             InitializeRooms();
             InitializeItem();
             InitializePlayer();
@@ -46,7 +45,6 @@ namespace Grupp4_Game
 
         public void TakeUserInput()
         {
-
             do
             {
                 if (player.currentPosition.Visited == false)
@@ -63,42 +61,28 @@ namespace Grupp4_Game
                     resultlist.Add(word);
                 }
 
-                /*  foreach (var word in userInput)
-                  {
-                      foreach (var action in actionArray)
-                      {
-                          if (word == action)
-                          {
-                              resultlist.Add(word);
-                          }
-                      }
-                      foreach (Item item in player.currentPosition.roomInventory)
-                      {
-                          if (item.ItemName.ToLower().Contains(word.ToLower()))
-                          {
-                              resultlist.Add(word);
-                          }
-                      }
-              
-                while (true)
+                foreach (var word in userInput)
                 {
-                    Console.WriteLine("");
-                    Console.Write("> ");
-                    userinput = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(userinput) || int.TryParse(userinput, out int wrong))
+                    foreach (var action in actionArray)
                     {
-                        Console.WriteLine("Only letters please");
+                        if (word == action)
+                        {
+                            resultlist.Add(word);
+                        }
                     }
-                    else
-                    break;
+                    foreach (Item item in player.currentPosition.roomInventory)
+                    {
+                        if (item.ItemName.ToLower().Contains(word.ToLower()))
+                        {
+                            resultlist.Add(word);
+                        }
+                    }
+
                 }
-                string[] userInput = userinput.ToUpper().Split(' ');
-
                 Switch(userInput);
-            }
-            while (GameisActive);
-        }
 
+            } while (GameisActive);
+        }
 
         public void Switch(string[] userInput)
         {
@@ -108,10 +92,10 @@ namespace Grupp4_Game
                 switch (word.ToLower())
                 {
                     case "go":
-                        player.Move(userInput.ToList());
+                        player.Move(userInput);
                         break;
                     case "move":
-                        player.Move(userInput.ToList());
+                        player.Move(userInput);
                         break;
                     case "look":
                         player.Look();
@@ -140,18 +124,20 @@ namespace Grupp4_Game
                     case "show":
                         player.ShowInventory();
                         break;
+                    case "inventory":
+                        player.ShowInventory();
+                        break;
 
                     /* case "open":
                             player.UseItem();
                             break;*/
                     default:
-                        Console.WriteLine("Sorry didn't understand that command..");
-                        Console.WriteLine("Try again.");
+                        Console.WriteLine("Sorry, didn't understand that command. Try again.");
                         break;
                 }
                 break;
             }
-            
+
         }
         public void InitializePlayer()
         {
@@ -187,17 +173,17 @@ namespace Grupp4_Game
             };
             livingRoom.Exits = new List<Exit>
             {
-                { new Exit("Mysterious white door (FORWARD)", true, 1, hallway, "forward", "door") }
+                { new Exit("Mysterious white door (FORWARD)", true, 1, hallway, "forward") }
             };
 
             kitchen.Exits = new List<Exit>
             {
-                { new Exit("Hall door (BACK)", false, 2, hallway, "back", "door") }
+                { new Exit("Hall door (BACK)", false, 2, hallway, "back") }
             };
 
             bathroom.Exits = new List<Exit>
             {
-                {new Exit("Hall door (WEST)", false, 3, hallway, "left","door") }
+                {new Exit("Hall door (WEST)", false, 3, hallway, "left") }
             };
 
 
@@ -208,12 +194,12 @@ namespace Grupp4_Game
         public void InitializeItem()
         {
             #region Skapar upp alla items.
-            outKey = new Key("Housekey", " On the floor lies a key, I get a sense of freedom when I see it.", " I think this key will help me get my butt outside this house", 4);
+            outKey = new Key("House key", " On the floor lies a key, I get a sense of freedom when I see it.", "I think this key will help me get my butt outside this house.", 4);
             kitchenKey = new Key("Kitchen key", "", "I'd rather not examine this any further.", 2);
-            knife = new Item("Knife", " I see a shiny sharp knife on the floor. On the side I read \"MORAKNIV\".", "Maybe I can use this on something to create something new");
-            beercan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this ");
+            knife = new Item("Knife", " I see a shiny sharp knife on the floor. On the side I read \"MORAKNIV\".", "A sharp knife, could definitely come to use.");
+            beercan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this.");
             beerKey = new Key("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1);
-            wineBottle = new Item("Winebottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can break something with it");
+            wineBottle = new Item("Wine bottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can break something with it.");
             toilet = new RoomProp("Toilet", " I see an unflushed toilet, who would do such a thing. It looks like there's something in it. ", "While inspecting the disgusting toilet I see a key, dare I take it?");
 
 
