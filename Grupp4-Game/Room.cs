@@ -37,6 +37,7 @@ namespace Grupp4_Game
             {
                 Console.Write(item.DroppedDescription);
             }
+            
             Console.WriteLine();
         }
 
