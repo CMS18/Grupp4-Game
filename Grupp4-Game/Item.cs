@@ -13,32 +13,28 @@ namespace Grupp4_Game
         public string DroppedDescription { get; set; }
         public string Examine { get; set; }
 
-        public Item(string itemname, string description, string examine)
+        public Item(string itemName, string droppedDescription, string examine)
         {
-            this.ItemName = itemname;
-            this.DroppedDescription = description;
+            this.ItemName = itemName;
+            this.DroppedDescription = droppedDescription;
             this.Examine = examine;
         }
-    
-
-        
 
         public void ExamineItem ()
         {
             Console.WriteLine(this.Examine);
 
         }
-
     }
 
     class Key : Item
     {
         public int KeyID { get; set; }
 
-        public Key(string itemname, string description, string examine, int keyID) : base(itemname, description, examine)
+        public Key(string itemname, string droppedDescription, string examine, int keyID) : base(itemname, droppedDescription, examine)
         {
             this.ItemName = itemname;
-            this.DroppedDescription = description;
+            this.DroppedDescription = droppedDescription;
         }
 
         public void UseKey(Key key, Exit door)
@@ -48,6 +44,16 @@ namespace Grupp4_Game
                 Console.WriteLine("Nyckeln passar");
             }
             else Console.WriteLine("Nyckeln passar inte");
+        }
+    }
+
+    class RoomProp : Item
+    {
+        public RoomProp(string itemName, string droppedDescription, string examine) : base(itemName, droppedDescription, examine)
+        {
+            ItemName = itemName;
+            DroppedDescription = droppedDescription;
+            Examine = examine;
         }
     }
 }

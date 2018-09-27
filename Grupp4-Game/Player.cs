@@ -26,7 +26,6 @@ namespace Grupp4_Game
         {
             foreach (var word in userinput)
             {
-
                 foreach (var item in currentPosition.roomInventory)
                 {
                     if (item.ItemName.ToLower().Contains(word.ToLower()))
@@ -38,7 +37,7 @@ namespace Grupp4_Game
                     }
                 }
             }
-
+            Console.WriteLine("Can't pick up that");
         }
 
         public void ShowInventory()
@@ -57,21 +56,21 @@ namespace Grupp4_Game
 
         public void UseItem(List<string> userinput)
         {
-          /*
-                foreach (Item item in inventoryList) //för varje item i inventory
-                {
-                if (userinput.Contains(item.ItemName))
-                {
-                    
-                }
-                    if (item.ItemName.Contains(word)) //om itemnamn innehåller ordet från userinput
-                    {
-                        //kolla om föremålet är användbart
-                        //
-                    }
+            /*
+                  foreach (Item item in inventoryList) //för varje item i inventory
+                  {
+                  if (userinput.Contains(item.ItemName))
+                  {
 
-                }*/
-           
+                  }
+                      if (item.ItemName.Contains(word)) //om itemnamn innehåller ordet från userinput
+                      {
+                          //kolla om föremålet är användbart
+                          //
+                      }
+
+                  }*/
+
         }
 
 
@@ -97,10 +96,8 @@ namespace Grupp4_Game
                         {
                             if (exit.Locked == false)
                             {
-                                currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
 
-                                Console.Write("Moved to ");
                                 currentPosition.PrintRoomName();
                                 return;
                             }
@@ -110,11 +107,9 @@ namespace Grupp4_Game
                                 return;
                             }
                         }
-                        else continue;
                     }
-                    Console.WriteLine("No exit this way");
+                    DefaultAction();
                     break;
-
 
                 case "back":
                     foreach (Exit exit in currentPosition.Exits)
@@ -125,7 +120,6 @@ namespace Grupp4_Game
                             {
                                 currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-                                Console.Write("Moved to ");
                                 currentPosition.PrintRoomName();
                                 return;
                             }
@@ -135,13 +129,9 @@ namespace Grupp4_Game
                                 return;
                             }
                         }
-                        else continue;
                     }
-                    Console.WriteLine("No exit this way");
+                    DefaultAction();
                     break;
-
-
-
 
                 case "right":
                     foreach (Exit exit in currentPosition.Exits)
@@ -152,7 +142,6 @@ namespace Grupp4_Game
                             {
                                 currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-                                Console.Write("Moved to ");
                                 currentPosition.PrintRoomName();
                                 return;
                             }
@@ -162,9 +151,8 @@ namespace Grupp4_Game
                                 return;
                             }
                         }
-                        else continue;
                     }
-                    Console.WriteLine("No exit this way");
+                    DefaultAction();
                     break;
 
                 case "left":
@@ -176,7 +164,6 @@ namespace Grupp4_Game
                             {
                                 currentPosition.Visited = true;
                                 currentPosition = exit.LeadsTo;
-                                Console.Write("Moved to ");
                                 currentPosition.PrintRoomName();
                                 return;
                             }
@@ -186,9 +173,8 @@ namespace Grupp4_Game
                                 return;
                             }
                         }
-                        else continue;
                     }
-                    Console.WriteLine("No exit this way");
+                    DefaultAction();
                     break;
 
                 default:
@@ -198,17 +184,19 @@ namespace Grupp4_Game
         }
         void DefaultAction()
         {
-            Console.WriteLine("No exit this way");
+            Console.WriteLine("No exit that way.");
             Console.Write("Exits: ");
+
+            string comma = (currentPosition.Exits.Count == 1) ? "" : ", ";
             foreach (var exit in currentPosition.Exits)
             {
-                Console.Write(exit.DoorDescription + ", ");
+                Console.Write(exit.DoorDescription + comma);
 
             }
+            Console.WriteLine();
         }
         public void DropItem(List<string> userinput)
         {
-
             foreach (var word in userinput)
             {
                 foreach (var item in inventoryList)
@@ -233,7 +221,7 @@ namespace Grupp4_Game
 
         public void Look()
         {
-            //Look
+            Console.Write(currentPosition.RoomExamine + "\n");
         }
 
     } //class

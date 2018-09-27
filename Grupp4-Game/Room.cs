@@ -10,19 +10,21 @@ namespace Grupp4_Game
     {
         string RoomName { get; set; }
         string RoomDescription { get; set; }
+        public string RoomExamine { get; set; }
         public bool Visited { get; set; }
 
 
         public List<Item> roomInventory = new List<Item>();
         public List<Exit> Exits = new List<Exit>();
+        public List<RoomProp> RoomProps = new List<RoomProp>();
 
 
-
-        public Room(string roomName, string roomDescription, bool visited)
+        public Room(string roomName, string roomDescription, string roomExamine, bool visited)
         {
-            this.RoomName = roomName;
-            this.RoomDescription = roomDescription;
-            this.Visited = visited;
+            RoomName = roomName;
+            RoomDescription = roomDescription;
+            Visited = visited;
+            RoomExamine = roomExamine;
         }
 
         public void PrintRoomName()
@@ -34,6 +36,10 @@ namespace Grupp4_Game
         {
             Console.Write(this.RoomDescription);
             foreach (var item in roomInventory)
+            {
+                Console.Write(item.DroppedDescription);
+            }
+            foreach (var item in RoomProps)
             {
                 Console.Write(item.DroppedDescription);
             }
