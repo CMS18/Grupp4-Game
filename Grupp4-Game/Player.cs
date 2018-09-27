@@ -72,10 +72,10 @@ namespace Grupp4_Game
         public void Look() //titta i rummet
         {
             currentPosition.ShowDescription();
-            Console.Write("Exits: ");
+            Console.Write("Exits: \n");
             foreach (var exit in currentPosition.Exits)
             {
-                Console.Write(exit.DoorDescription);
+                Console.Write(exit.DoorDescription + ". ");
             }
 
         }
