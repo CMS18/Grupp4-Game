@@ -54,7 +54,7 @@ namespace Grupp4_Game
                 player.currentPosition.Visited = true;
 
                 Console.Write("> ");
-                string[] userInput = Console.ReadLine().ToUpper().Split(' ');
+                string[] userInput = Console.ReadLine().ToLower().Split(' ');
                 resultlist = new List<string>(); //för att återställa listan vid nytt kommando
                 foreach (var word in userInput)
                 {
@@ -72,7 +72,7 @@ namespace Grupp4_Game
                     }
                     foreach (Item item in player.currentPosition.roomInventory)
                     {
-                        if (item.ItemName.ToLower().Contains(word.ToLower()))
+                        if (item.ItemName.ToLower().Contains(word))
                         {
                             resultlist.Add(word);
                         }
@@ -89,7 +89,7 @@ namespace Grupp4_Game
 
             foreach (var word in userInput)
             {
-                switch (word.ToLower())
+                switch (word)
                 {
                     case "go":
                         player.Move(userInput);
@@ -166,24 +166,24 @@ namespace Grupp4_Game
             #region Fyller rummen med Exits.
             hallway.Exits = new List<Exit>
             {
-                { new Exit("Slightly less mysterious white door (BACK)", false,1, livingRoom, "back") },
-                { new Exit("Kitchen door (FORWARD)", true, 2, kitchen, "forward") },
-                { new Exit("Stinky bathroom door (RIGHT)", false, 3, bathroom, "right") },
-                { new Exit("Front door (LEFT)", true, 4, outdoor, "left") }
+                { new Exit("Slightly less mysterious white door (Back)", false,1, livingRoom, "back") },
+                { new Exit("Kitchen door (Forward)", true, 2, kitchen, "forward") },
+                { new Exit("Stinky bathroom door (Right)", false, 3, bathroom, "right") },
+                { new Exit("Front door (Left)", true, 4, outdoor, "left") }
             };
             livingRoom.Exits = new List<Exit>
             {
-                { new Exit("Mysterious white door (FORWARD)", true, 1, hallway, "forward") }
+                { new Exit("Mysterious white door (Forward)", true, 1, hallway, "forward") }
             };
 
             kitchen.Exits = new List<Exit>
             {
-                { new Exit("Hall door (BACK)", false, 2, hallway, "back") }
+                { new Exit("Hall door (Back)", false, 2, hallway, "back") }
             };
 
             bathroom.Exits = new List<Exit>
             {
-                {new Exit("Hall door (WEST)", false, 3, hallway, "left") }
+                {new Exit("Hall door (West)", false, 3, hallway, "left") }
             };
 
 

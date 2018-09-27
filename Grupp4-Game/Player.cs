@@ -107,7 +107,7 @@ namespace Grupp4_Game
             {
                 if (userinput.Contains(item.ItemName.ToUpper()))
                 {
-                    if (item.ItemName == "winebottle")
+                    if (item.ItemName == "wine" || item.ItemName == "bottle")
                     {
                         //fredrik kommer och frågar om pussel
                     }
@@ -131,14 +131,14 @@ namespace Grupp4_Game
         void DefaultAction()
         {
             Console.WriteLine("No exit that way.");
-            Console.Write("Exits: ");
+            Console.Write("I see the following exits: ");
 
             string comma = (currentPosition.Exits.Count == 1) ? "" : ", ";
             foreach (var exit in currentPosition.Exits)
             {
                 Console.Write(exit.DoorDescription + comma);
             }
-            Console.WriteLine();
+            Console.WriteLine(".");
         }
 
         public void Move(string[] userInput)
@@ -147,13 +147,12 @@ namespace Grupp4_Game
 
             foreach (string word in userInput)
             {
-                if (word == "FORWARD" || word == "LEFT" || word == "BACK" || word == "RIGHT")
+                if (word == "forward" || word == "left" || word == "back" || word == "right")
                 {
                     direction = word.ToLower();
                 }
             }
             CheckDirection(direction); //istället för switch-case
-
         }
 
         public void CheckDirection(string direction) //istället för switch-case för direction
