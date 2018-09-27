@@ -12,17 +12,26 @@ namespace Grupp4_Game
         public string ItemName { get; set; }
         public string DroppedDescription { get; set; }
         public string Examine { get; set; }
-        //public string MatchId { get; set; }
-        // public string itemType { get; set; }
+        public string MatchId { get; set; }
+        public string ItemType { get; set; }
+        public int KeyID { get; set; } //får inte use-item metoden att kunna använda keyID om den e i egen klass, får fixa detta
+        
 
       
-        public Item(string itemName, string droppedDescription, string examine/*, string matchID,*/ /*string itemType*/)
+        public Item(string itemName, string droppedDescription, string examine, string matchID, string itemType)
         {
             this.ItemName = itemName;
             this.DroppedDescription = droppedDescription;
             this.Examine = examine;
-            //this.MatchId = matchID;
-            //this.itemType = itemType;
+            this.MatchId = matchID;
+            this.ItemType = itemType;
+        }
+        public Item(string itemname, string droppedDescription, string examine, int keyiD, string itemtype) 
+        {
+            this.ItemName = itemname;
+            this.DroppedDescription = droppedDescription;
+            this.KeyID = keyiD;
+            this.ItemType = itemtype;
         }
 
         public void ExamineItem ()
@@ -32,14 +41,16 @@ namespace Grupp4_Game
         }
     }
 
-    class Key : Item
+   /* class Key : Item
      {
          public int KeyID { get; set; }
 
-        public Key(string itemname, string droppedDescription, string examine, int keyID) : base(itemname, droppedDescription, examine)
+        public Key(string itemname, string droppedDescription, string examine, int keyID, string itemtype) : base(itemname, droppedDescription, examine, "0", "key")
         {
             this.ItemName = itemname;
             this.DroppedDescription = droppedDescription;
+            this.KeyID = keyID;
+           this.ItemType = itemtype;
         }
 
         public void UseKey(Key key, Exit door)
@@ -51,14 +62,15 @@ namespace Grupp4_Game
             else Console.WriteLine("Nyckeln passar inte");
         }
     }
-
+    */
     class RoomProp : Item
     {
-        public RoomProp(string itemName, string droppedDescription, string examine) : base(itemName, droppedDescription, examine)
+        public RoomProp(string itemName, string droppedDescription, string examine, string itemtype) : base(itemName, droppedDescription, examine, "0", "prop")
         {
             ItemName = itemName;
             DroppedDescription = droppedDescription;
             Examine = examine;
+            ItemType = itemtype;
         }
     }
 }

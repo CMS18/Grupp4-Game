@@ -18,27 +18,18 @@ namespace Grupp4_Game
         }
 
         public void PickUpItem(string[] userinput)
+
         {
-            bool success = false;
-
-            foreach (var word in userinput)
+            foreach (var item in currentPosition.roomInventory)
             {
-                foreach (var item in currentPosition.roomInventory)
+                if (userinput.Contains(item.ItemType.ToUpper()))
                 {
-                    if (item.ItemName.ToLower().Contains(word.ToLower()))
-                    {
-                        Console.WriteLine("You picked up " + item.ItemName);
-                        currentPosition.roomInventory.Remove(item);
-                        inventoryList.Add(item);
-                        success = true;
-                        break;
-                    }
+                    Console.WriteLine("You picked up " + item.ItemName);
+                    currentPosition.roomInventory.Remove(item);
+                    inventoryList.Add(item);
+                    break;
                 }
-            }
-            if(success == false)
-            {
-                Console.WriteLine("Can't pick up that");
-
+                Console.WriteLine("Can't pick that up");
             }
         }
 
@@ -61,6 +52,9 @@ namespace Grupp4_Game
             {
                 if (userinput.Contains(roomitem.ItemName.ToUpper())) //om itemet är i rummet
                 {
+                    Console.WriteLine("(Taken.)");
+                    inventoryList.Add(roomitem);
+                    currentPosition.roomInventory.Remove(roomitem);
                     Console.WriteLine(roomitem.Examine);
                     break;
                 }
@@ -75,7 +69,7 @@ namespace Grupp4_Game
                 }
             }
 
-            foreach (var roomProp in currentPosition.RoomProps)
+            foreach (var roomProp in currentPosition.roomInventory/*roomprop*/)
             {
                 if (userinput.Contains(roomProp.ItemName.ToUpper())) //om itemet är i rummet
                 {
@@ -97,35 +91,62 @@ namespace Grupp4_Game
 
         public void CreateKey()
         {
-            Item beerKey = new Key("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1);
+            Item beerKey = new Item("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1, "key");
             inventoryList.Add(beerKey);
         }
 
         public void UseItem(string[] userinput)
+
         {
             foreach (var item in inventoryList)
             {
-                if (userinput.Contains(item.ItemName.ToUpper()))
+                if (userinput.Contains(item.ItemType.ToUpper()))
                 {
-                    if (item.ItemName == "wine" || item.ItemName == "bottle")
+                    if (item.ItemName == "winebottle")
+
                     {
                         //fredrik kommer och frågar om pussel
                     }
 
-                    foreach (var exit in currentPosition.Exits)
+                    foreach (var exit in currentPosition.Exits) //om item på dörr
                     {
-                        if (userinput.Contains(exit.DoorDescription.ToUpper()))
+                        if (userinput.Contains(exit.LockType.ToUpper()))
                         {
-                            //if (exit.DoorID == item.KeyID)
-                            //{
-                            //    exit.Locked = false;
-                            //    Console.WriteLine("Unlocked.");
-                            //    inventoryList.Remove(item);
-                            //}
+                            if (exit.DoorID == item.KeyID) //här ska det vara key.keyid
+                            {
+                                exit.Locked = false;
+                                Console.WriteLine("Unlocked.");
+                                inventoryList.Remove(item);
+                                return;
+                            }
                         }
                     }
+
+                    foreach (var inventoryitem in inventoryList) //om item på ett annat item
+                    {
+                        if (inventoryitem.ItemName == item.ItemName) //om samma item så ta nästa
+                        {
+                            continue;
+                        }
+                        if (userinput.Contains(inventoryitem.ItemType.ToUpper()))
+                        {
+                            if (inventoryitem.MatchId == item.MatchId) //om itemsen matchar med varandra
+                            {
+                                inventoryList.Remove(item);
+                                inventoryList.Remove(inventoryitem);
+                                CreateKey();
+                                Console.WriteLine("You created a key");
+                                return;
+                            }
+                            else
+                                Console.WriteLine("These things doesn't match");
+
+                        }
+                    }
+                    Console.WriteLine("Cannot use this");
                 }
             }
+            Console.WriteLine("non such thing in your inventory");
         }
 
         void DefaultAction()
@@ -147,7 +168,7 @@ namespace Grupp4_Game
 
             foreach (string word in userInput)
             {
-                if (word == "forward" || word == "left" || word == "back" || word == "right")
+                if (word == "FORWARD" || word == "LEFT" || word == "BACK" || word == "RIGHT")
                 {
                     direction = word.ToLower();
                 }
@@ -184,7 +205,7 @@ namespace Grupp4_Game
         {
             foreach (var item in inventoryList)
             {
-                if (userinput.Contains(item.ItemName.ToUpper())) //om listan innehåller 
+                if (userinput.Contains(item.ItemType.ToUpper())) //om listan innehåller 
                 {
                     Console.WriteLine("Dropped item {0}.", item.ItemName);
                     inventoryList.Remove(item);
