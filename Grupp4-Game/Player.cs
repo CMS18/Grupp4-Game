@@ -43,7 +43,7 @@ namespace Grupp4_Game
 
         public void ShowInventory()
         {
-            Console.WriteLine("Din inventory:");
+            Console.WriteLine("Your inventory:");
             foreach (var item in inventoryList)
             {
                 Console.WriteLine(item.ItemName);

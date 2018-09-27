@@ -52,14 +52,16 @@ namespace Grupp4_Game
                 {
                     player.currentPosition.ShowDescription();
                 }
-                
-                Console.Write("> ");
-                string[] userInput = Console.ReadLine().ToUpper().Split(' ');
-                resultlist = new List<string>(); //för att återställa listan vid nytt kommando
-                foreach (var word in userInput)
-                {
-                    resultlist.Add(word);
-                }
+
+                    Console.Write("> ");
+                    string[] userInput = Console.ReadLine().ToUpper().Split(' ');
+                    resultlist = new List<string>(); //för att återställa listan vid nytt kommando
+                    foreach (var word in userInput)
+                    {
+                        resultlist.Add(word);
+                    }
+  
+
 
                 /*  foreach (var word in userInput)
                   {
@@ -114,9 +116,14 @@ namespace Grupp4_Game
                     case "use":
                         player.UseItem(userInput);
                             break;
-                        /* case "open":
-                                player.UseItem();
-                                break;*/
+                    /* case "open":
+                            player.UseItem();
+                            break;*/
+                    default:
+                        Console.WriteLine("Sorry didn't understand that command..");
+                        Console.WriteLine("Try again.");
+                        break;
+
                 }
             }
         }
