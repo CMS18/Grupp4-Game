@@ -12,14 +12,9 @@ namespace Grupp4_Game
         public string RoomDescription { get; set; }
         public bool Visited { get; set; }
         public string VisitedDescription { get; set; }
-      
-
         public List<Item> roomInventory = new List<Item>();
         public List<Exit> Exits = new List<Exit>();
-      //  public List<Key> Keys = new List<Key>();
         public List<RoomProp> RoomProps = new List<RoomProp>();
-
-
 
         public Room(string roomName, string roomDescription, string visitedDesc, bool visited)
         {
@@ -37,8 +32,13 @@ namespace Grupp4_Game
         public void ShowDescription()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(RoomDescription);
-            
+            if (!Visited)
+            {
+                Console.WriteLine(RoomDescription);
+            }
+            else
+                Console.WriteLine(VisitedDescription);
+
             foreach (var item in roomInventory)
             {
                 Console.Write(item.DroppedDescription);

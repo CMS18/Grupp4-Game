@@ -9,7 +9,7 @@ namespace Grupp4_Game
     class Exit
     {
         public bool Locked { get; set;}
-        public string lockedInfo = "Door handle wont budge, i need a key to unlock this door.";
+        public string lockedInfo = "Door handle wont budge, I will need a key to unlock this door.";
         public string Direction { get; set; }
         public int DoorID { get; set; }
         public string LockType { get; set; }
@@ -28,17 +28,5 @@ namespace Grupp4_Game
            
         }
 
-        //public void Inspect()
-        //{
-        //    if (this.Locked)
-        //    {
-        //        Console.WriteLine("This door ");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Du kan öppna den här dörren");
-        //    }
-        //}
-        
     } //class
 } //namespace

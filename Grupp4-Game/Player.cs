@@ -69,7 +69,6 @@ namespace Grupp4_Game
                     Console.WriteLine(item.Examine);
                     break;
                 }
-
             }
 
             foreach (var roomitem in CurrentPosition.roomInventory) //för varje rumsitem
@@ -79,7 +78,6 @@ namespace Grupp4_Game
                     Console.WriteLine(roomitem.Examine);
                     break;
                 }
-
             }
 
             foreach (var roomProp in CurrentPosition.RoomProps)
@@ -104,9 +102,6 @@ namespace Grupp4_Game
                     else Console.WriteLine("This door isn't locked.");
                     break;
                 }
-                    
-                    
-                
             }
         }
 
@@ -149,8 +144,7 @@ namespace Grupp4_Game
                             return;
                         }
                     }
-
-
+                    
                     foreach (var exit in CurrentPosition.Exits) //om item på dörr
                     {
                         if (userinput.Contains(exit.LockType.ToUpper()))
@@ -239,10 +233,8 @@ namespace Grupp4_Game
 
                         Console.Write("Moved to ");
                         CurrentPosition.PrintRoomName();
-                        if (CurrentPosition.Visited)
-                        {
-                            Console.WriteLine(CurrentPosition.VisitedDescription);
-                        }
+                        CurrentPosition.ShowDescription();
+                        CurrentPosition.Visited = true;
                         return;
                     }
                     else

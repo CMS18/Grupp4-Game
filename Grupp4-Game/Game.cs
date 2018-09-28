@@ -10,16 +10,13 @@ namespace Grupp4_Game
     {
 
         public static Player player { get; set; }
-
-
-
         Room hallway;
         Room kitchen;
         Room outdoor;
         Room livingRoom;
         Room bathroom;
 
-        
+
         Item kitchenKey;
         Item knife;
         Item beercan;
@@ -41,27 +38,19 @@ namespace Grupp4_Game
             InitializeItem();
             InitializePlayer();
             GameisActive = true;
-            Console.ForegroundColor = ConsoleColor.Cyan;
+           
             player.CurrentPosition.ShowDescription();
-            
-         
-    }
+            player.CurrentPosition.Visited = true;
 
-
+        }
+        
         public void TakeUserInput()
         {
             do
             {
-                if (player.CurrentPosition.Visited == false)
-                {
-                    player.CurrentPosition.ShowDescription();
-                }
-                player.CurrentPosition.Visited = true;
-
                 while (true)
-
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("");
                     Console.Write("> ");
                     userinput = Console.ReadLine();
@@ -73,19 +62,17 @@ namespace Grupp4_Game
                     else
                         break;
                 }
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Green;
                 string[] userInput = userinput.ToUpper().Split(' ');
                 Switch(userInput);
-
+                Console.ResetColor();
             }
-
             while (GameisActive);
         }
 
 
         public void Switch(string[] userInput)
         {
-
             foreach (var word in userInput)
             {
                 switch (word)
@@ -133,7 +120,6 @@ namespace Grupp4_Game
                 }
                 break;
             }
-
         }
         public void InitializePlayer()
         {
@@ -146,12 +132,15 @@ namespace Grupp4_Game
             #region Skapar upp alla rummen.
             List<Room> roomList = new List<Room>();
 
-            hallway = new Room("Hallway", "I enter a hallway, to my left is the front door, the door in front of me seems to be a kitchen and to my right I see a bathroom door.\n" +
+            hallway = new Room("Hallway", "I enter a dark, big and kinda empty hallway. To my left I see a big door which seems to be the front door. \n" + 
+                "In front of me seems to be a kitchen door and to my right I see a wideopen bathroom door leading into more darkness.\n" +
                 "Duty calls but I sense a vague smell of no thank you from the bathroom door", "I see the front door to my left, kitchen in front of me and the bathroom to my right.", false);
             livingRoom = new Room("Living Room", "..Suddenly I wake up in a room that resembles a living room, though I've got no clue how I got here.\n" +
-                " I see several empty beer cans around the room, perhaps they tell a story? In front of me is a white door.", "The living room smells of beer and regrets.", true); //startposition
-            kitchen = new Room("Kitchen", "I enter the kitchen and see a wine bottle, my mind's telling me no, but my body's telling me yes", "I'm too hangry to hang out in this kitchen for much longer.", false);
-            bathroom = new Room("Bathroom", "The first thing that comes to my mind as I enter the bathroom is \"Is this the start of a SAW movie? Sure smells like it\". I see a toilet.", "Gosh.. that smell.", false);
+                " I see several empty beer cans around the room, perhaps they tell a story? In front of me is a white door.", "The living room smells of beer and regrets.", false); //startposition
+            kitchen = new Room("Kitchen", "I enter the kitchen and see a full wine bottle, my mind's telling me no, but my body's telling me yes", "I'm too hangry to hang out in this kitchen for much longer.", false);
+            bathroom = new Room("Bathroom", "The first thing that comes to my mind as I enter the bathroom is \"Is this the start of a SAW movie?\n" +
+                "Sure smells like it\".", "Gosh.. that smell.", false);
+
             outdoor = new Room("Outdoor", "FREDOOOOOOOOOOOOOOOOOOOOOM!!!!!!!", "", false);
 
             roomList.Add(livingRoom);
@@ -193,8 +182,8 @@ namespace Grupp4_Game
             #region Skapar upp alla items.
             kitchenKey = new Key("Kitchen key", "", "I'd rather not examine this any further.", 2, "key");
             knife = new Item("Knife", " I see a shiny sharp knife on the floor. On the side I read \"MORAKNIV\".", "A sharp knife, could definitely come to use.", "1", "knife");
-            beercan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this.", "1", "can");
-            wineBottle = new Item("Wine bottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can break something with it.", "0", "bottle");
+            beercan = new Item("Beer can", "\n On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this.", "1", "can");
+            wineBottle = new Item("Wine bottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can just smash it at my head", "0", "bottle");
             toilet = new RoomProp("Toilet", " I see an unflushed toilet, who would do such a thing. It looks like there's something in it. ", "While inspecting the disgusting toilet I see a key, dare I take it?", "toilet");
 
 
@@ -208,18 +197,9 @@ namespace Grupp4_Game
             kitchen.roomInventory.Add(wineBottle);
 
             #endregion
-
         }
-
-
     } //class
 } //namespace 
 
-
-
-//PlayerName
-//RoomList
-//Victory
-//PlayingGame()
 
 
