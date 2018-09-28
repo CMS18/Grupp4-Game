@@ -14,7 +14,7 @@ namespace Grupp4_Game
         public string Examine { get; set; }
         public string MatchId { get; set; }
         public string ItemType { get; set; }
-        public int KeyID { get; set; } //får inte use-item metoden att kunna använda keyID om den e i egen klass, får fixa detta
+       // public int KeyID { get; set; } //får inte use-item metoden att kunna använda keyID om den e i egen klass, får fixa detta
         
 
       
@@ -26,13 +26,13 @@ namespace Grupp4_Game
             this.MatchId = matchID;
             this.ItemType = itemType;
         }
-        public Item(string itemname, string droppedDescription, string examine, int keyiD, string itemtype) 
+       /* public Item(string itemname, string droppedDescription, string examine, int keyiD, string itemtype) 
         {
             this.ItemName = itemname;
             this.DroppedDescription = droppedDescription;
             this.KeyID = keyiD;
             this.ItemType = itemtype;
-        }
+        }*/
 
         public void ExamineItem ()
         {
@@ -41,7 +41,7 @@ namespace Grupp4_Game
         }
     }
 
-   /* class Key : Item
+   class Key : Item
      {
          public int KeyID { get; set; }
 
@@ -62,7 +62,7 @@ namespace Grupp4_Game
             else Console.WriteLine("Nyckeln passar inte");
         }
     }
-    */
+    
     class RoomProp : Item
     {
         public RoomProp(string itemName, string droppedDescription, string examine, string itemtype) : base(itemName, droppedDescription, examine, "0", "prop")
