@@ -13,6 +13,7 @@ namespace Grupp4_Game
         public List<Key> keyList = new List<Key>();
         public Room CurrentPosition { get; set; }
 
+
         public Player(string name)
         {
             this.Name = name;
@@ -144,7 +145,8 @@ namespace Grupp4_Game
                         Puzzle puzzle = new Puzzle();
                         if (puzzle.SolvedPuzzle)
                         {
-                            // housekey 
+                            inventoryList.Remove(item);
+                            return;
                         }
                     }
 
@@ -156,7 +158,7 @@ namespace Grupp4_Game
                             foreach (var key in keyList)
                             {
 
-                                if (exit.DoorID == key.KeyID) //här ska det vara key.keyid
+                                if (exit.DoorID == key.KeyID) 
                                 {
                                     exit.Locked = false;
                                     Console.WriteLine("The key fits, and the door unlocks.");

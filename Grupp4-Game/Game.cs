@@ -8,7 +8,10 @@ namespace Grupp4_Game
 {
     class Game
     {
-        Player player = new Player("NAMN");
+
+        public static Player player { get; set; }
+
+
 
         Room hallway;
         Room kitchen;
@@ -16,7 +19,7 @@ namespace Grupp4_Game
         Room livingRoom;
         Room bathroom;
 
-        Item houseKey;
+        
         Item kitchenKey;
         Item knife;
         Item beercan;
@@ -32,6 +35,7 @@ namespace Grupp4_Game
         public string userinput;
         public Game()
         {
+            player = new Player("namn");
             Console.Title = "A hungover adventure";
             InitializeRooms();
             InitializeItem();
@@ -39,7 +43,9 @@ namespace Grupp4_Game
             GameisActive = true;
             Console.ForegroundColor = ConsoleColor.Cyan;
             player.CurrentPosition.ShowDescription();
-        }
+            
+         
+    }
 
 
         public void TakeUserInput()
@@ -145,7 +151,7 @@ namespace Grupp4_Game
             livingRoom = new Room("Living Room", "..Suddenly I wake up in a room that resembles a living room, though I've got no clue how I got here.\n" +
                 " I see several empty beer cans around the room, perhaps they tell a story? In front of me is a white door.", "The living room smells of beer and regrets.", true); //startposition
             kitchen = new Room("Kitchen", "I enter the kitchen and see a wine bottle, my mind's telling me no, but my body's telling me yes", "I'm too hangry to hang out in this kitchen for much longer.", false);
-            bathroom = new Room("Bathroom", "The first thing that comes to my mind as I enter the bathroom is \"Is this the start of a SAW movie? Sure smells like it\".", "Gosh.. that smell.", false);
+            bathroom = new Room("Bathroom", "The first thing that comes to my mind as I enter the bathroom is \"Is this the start of a SAW movie? Sure smells like it\". I see a toilet.", "Gosh.. that smell.", false);
             outdoor = new Room("Outdoor", "FREDOOOOOOOOOOOOOOOOOOOOOM!!!!!!!", "", false);
 
             roomList.Add(livingRoom);
@@ -185,11 +191,9 @@ namespace Grupp4_Game
         public void InitializeItem()
         {
             #region Skapar upp alla items.
-            houseKey = new Key("House key", "", "I think this key will help me get my butt outside this house.", 4, "key");
             kitchenKey = new Key("Kitchen key", "", "I'd rather not examine this any further.", 2, "key");
             knife = new Item("Knife", " I see a shiny sharp knife on the floor. On the side I read \"MORAKNIV\".", "A sharp knife, could definitely come to use.", "1", "knife");
             beercan = new Item("Beer can", " On the table I see a half full beer can. It reads: \"Norrlands Guld\".", "Maybe I can create something from this.", "1", "can");
-            // beerKey = new Item("Beer Key", " I see a weird key on the floor", "This key shouldn't work but the force is strong within this key", 1, "key");
             wineBottle = new Item("Wine bottle", "\n A winebottle lays on the floor.", "Maybe I can drink this and forget about my sorrows, or I can break something with it.", "0", "bottle");
             toilet = new RoomProp("Toilet", " I see an unflushed toilet, who would do such a thing. It looks like there's something in it. ", "While inspecting the disgusting toilet I see a key, dare I take it?", "toilet");
 
@@ -200,7 +204,7 @@ namespace Grupp4_Game
             bathroom.roomInventory.Add(kitchenKey);
             player.keyList.Add((Key)kitchenKey);
             bathroom.RoomProps.Add(toilet);
-            kitchen.roomInventory.Add((Key)houseKey); // av fredrik
+            //kitchen.roomInventory.Add((Key)houseKey); // av fredrik
             kitchen.roomInventory.Add(wineBottle);
 
             #endregion

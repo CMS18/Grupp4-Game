@@ -38,7 +38,12 @@ namespace Grupp4_Game
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(RoomDescription);
+            
             foreach (var item in roomInventory)
+            {
+                Console.Write(item.DroppedDescription);
+            }
+            foreach (var item in RoomProps)
             {
                 Console.Write(item.DroppedDescription);
             }

@@ -8,10 +8,11 @@ namespace Grupp4_Game
     class Puzzle
     {
         public bool SolvedPuzzle = false;
-
+       
+        
         public Puzzle()
         {
-
+            Key houseKey;
 
              Console.WriteLine("Fredrik pops out from the bottle, \n" +
              "You must answer two questions before I let you out.. \n" +
@@ -74,9 +75,13 @@ namespace Grupp4_Game
 
                     Console.WriteLine("Congratz! You will live today and you also win my Tesla!" +
 
-                                          "\nGo ahead and try it!");
+                                          "\nGo ahead and try it!" +
+                    "\n Here you get a key");
                     SolvedPuzzle = true;
-                    
+                    houseKey = new Key("House key", "", "I think this key will help me get my butt outside this house.", 4, "key");
+                    Game.player.keyList.Add(houseKey);
+                    Game.player.inventoryList.Add(houseKey);
+                   
 
                 }
 
@@ -101,9 +106,6 @@ namespace Grupp4_Game
 
                 }
 
-
-
-                Console.ReadLine();
 
             }
             while (!SolvedPuzzle);
