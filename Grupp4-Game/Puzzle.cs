@@ -26,8 +26,7 @@ namespace Grupp4_Game
 
         public Puzzle()
         {
-            Chances = 5;
-            //Console.ForegroundColor = ConsoleColor.Cyan;
+            Chances = 4;
             Console.ResetColor();
             Console.WriteLine("A wild Fredrik Haglund appears from behind the kitchen door!\n" +
             "\"Riddle me this!\" he says as he pulls up a sheet of paper with something written on it.");
@@ -126,13 +125,13 @@ namespace Grupp4_Game
 
                 if (userInput == "no")
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 3; i++)
                     {
-                        Thread.Sleep(1500);
+                        Thread.Sleep(1000);
                         Console.Write(".");
                     }
 
-                    Console.Write("What's wrong McFly? Oh err i mean " + Game.player.Name + ". ..Chicken? \n");
+                    Console.Write("what's wrong McFly? Oh err i mean " + Game.player.Name + ". ..Chicken? \n");
 
                     if (GetUserInput() == "nobody calls me chicken")
                     {
@@ -214,18 +213,18 @@ namespace Grupp4_Game
         private void PrintDramaticDots1()
         {
             Thread.Sleep(5000);
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(1500);
+                Thread.Sleep(1000);
                 Console.Write(".");
             }
         }
         private void PrintDramaticDots2()
         {
             Thread.Sleep(5000);
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(1500);
+                Thread.Sleep(1000);
                 Console.Write(".");
             }
         }

@@ -35,12 +35,11 @@ namespace Grupp4_Game
         public Game(string playerName)
         {
             Console.Clear();
-            GameCompleted();
-            //player = new Player(playerName);
-            //InitializeRooms();
-            //InitializeItem();
-            //InitializePlayer();
-            //TakeUserInput();
+            player = new Player(playerName);
+            InitializeRooms();
+            InitializeItem();
+            InitializePlayer();
+            TakeUserInput();
         }
 
 
@@ -224,7 +223,7 @@ namespace Grupp4_Game
 
             Thread.Sleep(2000);
             Console.WriteLine();
-            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\rober\Source\Repos\Grupp4-Game2\Grupp4-Game\groundcontrol.wav");
+            SoundPlayer simpleSound = new SoundPlayer(@"groundcontrol.wav");
             simpleSound.Play();
             Console.WriteLine();
 
@@ -252,9 +251,9 @@ namespace Grupp4_Game
             void PrintDramaticDots()
             {
                 Thread.Sleep(3000);
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    Thread.Sleep(1500);
+                    Thread.Sleep(1000);
                     Console.Write(".");
                 }
             }
