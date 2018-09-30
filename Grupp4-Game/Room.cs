@@ -16,7 +16,6 @@ namespace Grupp4_Game
 
         public List<Item> roomInventory = new List<Item>();
         public List<Exit> Exits = new List<Exit>();
-      //  public List<Key> Keys = new List<Key>();
         public List<RoomProp> RoomProps = new List<RoomProp>();
 
 

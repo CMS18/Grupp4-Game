@@ -14,10 +14,7 @@ namespace Grupp4_Game
         public string Examine { get; set; }
         public string MatchId { get; set; }
         public string ItemType { get; set; }
-       // public int KeyID { get; set; } //får inte use-item metoden att kunna använda keyID om den e i egen klass, får fixa detta
-        
-
-      
+       
         public Item(string itemName, string droppedDescription, string examine, string matchID, string itemType)
         {
             this.ItemName = itemName;
@@ -26,18 +23,10 @@ namespace Grupp4_Game
             this.MatchId = matchID;
             this.ItemType = itemType;
         }
-       /* public Item(string itemname, string droppedDescription, string examine, int keyiD, string itemtype) 
-        {
-            this.ItemName = itemname;
-            this.DroppedDescription = droppedDescription;
-            this.KeyID = keyiD;
-            this.ItemType = itemtype;
-        }*/
-
+      
         public void ExamineItem ()
         {
             Console.WriteLine(this.Examine);
-
         }
     }
 

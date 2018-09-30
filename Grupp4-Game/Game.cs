@@ -70,7 +70,6 @@ namespace Grupp4_Game
 
         public void Switch(string[] userInput)
         {
-
             foreach (var word in userInput)
             {
                 switch (word)
@@ -116,7 +115,6 @@ namespace Grupp4_Game
                 }
                 break;
             }
-
         }
 
         public void InitializePlayer()
@@ -264,11 +262,5 @@ namespace Grupp4_Game
     } //class
 } //namespace 
 
-
-
-//PlayerName
-//RoomList
-//Victory
-//PlayingGame()
 
 
