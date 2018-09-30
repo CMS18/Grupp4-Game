@@ -59,6 +59,9 @@
     <Folder Include="Items\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="groundcontrol.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="teslaroadster.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -35,12 +35,13 @@ namespace Grupp4_Game
         public Game(string playerName)
         {
             Console.Clear();
+            GameCompleted();
             //GameActive = true;
-            player = new Player(playerName);
-            InitializeRooms();
-            InitializeItem();
-            InitializePlayer();
-            TakeUserInput();
+            //player = new Player(playerName);
+            //InitializeRooms();
+            //InitializeItem();
+            //InitializePlayer();
+            //TakeUserInput();
         }
 
 
@@ -205,11 +206,9 @@ namespace Grupp4_Game
         public static void GameCompleted()
         {
 
-            SoundPlayer player = new SoundPlayer();
-            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\yourmusic.wav";
-            player.Play();
 
-            Console.WriteLine("You leave the house and feel fresh air hitting your face, you're not sure when you last took a breath without feeling the smell of alcohol.");
+            PrintDramaticDots();
+            Console.WriteLine("you leave the house and feel fresh air hitting your face, you're not sure when you last took a breath without feeling the smell of alcohol.");
             PrintDramaticDots();
             Console.WriteLine("time to leave, lucky coincidence you've got your SpaceX engineered Falcon Heavy!");
             PrintDramaticDots();
@@ -220,7 +219,10 @@ namespace Grupp4_Game
             Console.WriteLine("and obviously you try sitting in the drivers seat..");
             PrintDramaticDots();
             Console.WriteLine("a hatch opens and you're flung into outer space..");
-            PrintDramaticDots();
+            Thread.Sleep(2000);
+            Console.WriteLine();
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\rober\Source\Repos\Grupp4-Game2\Grupp4-Game\groundcontrol.wav");
+            simpleSound.Play();
             Console.WriteLine();
 
             StreamReader reader = new StreamReader("teslaroadster.txt");
