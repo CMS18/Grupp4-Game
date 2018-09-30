@@ -2,116 +2,233 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Grupp4_Game
 {
     class Puzzle
     {
-        public bool SolvedPuzzle = false;
-       
-        
+        private bool GameWon { get; set; }
+        private string Answer { get; set; }
+        private int Chances { get; set; }
+
+        string[] question = {
+                "Which car brand is the coolest one? (Sorry Samie i don't think you can get this one right).",
+                "If you user .OrderBy(), what can you use afterwards to customise the order even further?",
+                "Which default value does a string have?",
+            };
+
+        string[] answer = {
+                "tesla",
+                ".thenby()",
+                "null"
+            };
+
         public Puzzle()
         {
-            Key houseKey;
+            Chances = 5;
+            //Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ResetColor();
+            Console.WriteLine("A wild Fredrik Haglund appears from behind the kitchen door!\n" +
+            "\"Riddle me this!\" he says as he pulls up a sheet of paper with something written on it.\n");
+            PlayPuzzle();
+        }
 
-             Console.WriteLine("Fredrik pops out from the bottle, \n" +
-             "You must answer two questions before I let you out.. \n" +
-             "First..");
-            /*
-             Console.WriteLine("What is the name of the operator when you use \"Where\" in LINQ?");
-             string answer1 = Console.ReadLine().ToLower();
-             int count = 0;
-             if (count == 3)
-             {
-                 Console.WriteLine("Game over for you my friend! I will never let you out until you score all questions!" +
-                 "\nFredrik force you to drink up all the liquor until you faint..");
-             }
+        public void PlayPuzzle()
+        {
+            Console.WriteLine("The rules are simple. You've got " + Chances + " lives and if you manage to answer all 3 questions correctly i'll give you the house key.");
+            Console.WriteLine();
+            do
+            {
+                Console.WriteLine(question[0]);
+                if (GetUserInput() == answer[0])
+                {
+                    Console.WriteLine("Correct! Next question.");
+                    break;
+                }
+                else
+                {
+                    Chances--;
+                    Console.WriteLine("Wrong answer! Hint: The answer rhymes with \"besla\".");
+                }
+                if (Chances == 0)
+                {
+                    PuzzleGameOver();
+                    break;
+                }
 
-             if (answer1 == "filter")
-             {
-                 Console.WriteLine("Correct! Now the last question..");
-             }
+            }
+            while (Chances > 0);
 
-             else
-             {
-                 count++;
-                 Console.WriteLine("Wrong! You have " + count + " tries left");
-             }
+            while (Chances > 0)
+            {
+                Console.WriteLine(question[1]);
+                if (GetUserInput() == answer[1])
+                {
+                    Console.WriteLine("Correct! Next question.");
+                    break;
+                }
+                else
+                {
+                    Chances--;
+                    Console.WriteLine("Wrong answer! Hint: First i wanna order by this, and then by that..");
+                }
+                if (Chances == 0)
+                {
+                    PuzzleGameOver();
+                    break;
+                }
+            }
 
 
-         */
-            string[] question = {"What is the name of the operator when you use \"Where\" in LINQ?",
+            while (Chances > 0)
+            {
+                Console.WriteLine(question[2]);
+                if (GetUserInput() == answer[2])
+                {
+                    Console.WriteLine("Congratulations! You won the grand prize, the house key! Oh and also i'll throw in something extra for you effort.");
+                    GivePrizes();
+                    break;
+                }
+                else
+                {
+                    Chances--;
+                    Console.WriteLine("Wrong answer! Hint: When i eat too much my stomach gets full, and a strings default value is..");
+                }
+                if (Chances == 0)
+                {
+                    PuzzleGameOver();
+                    break;
+                }
+            }
+        }
 
-                                 "What initialize a lambda expression?",
+        public string GetUserInput()
+        {
+            string userInput;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\n> ");
+            userInput = Console.ReadLine().ToLower();
+            Console.ResetColor();
+            return userInput;
 
-                                 "In which country lie Tesla headquarters?"};
-            string[] answer = {"filter",
+        }
 
-                               "=>",
-
-                               "california"};
-
-            Random rnd = new Random();
-
-            int count = 3;
+        public void PuzzleGameOver()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Game over! \nSince i can't give you an F (Seeing as we're in a game), i'll just challenge you to drink this whole wine bottle.");
 
             do
             {
-                
-                
-                int randomQuestion = rnd.Next(0, 3);
+                Console.WriteLine("So what do you say? Are you up for the challenge? Yes or no?");
+                string userInput = GetUserInput();
 
-                string option = question[randomQuestion];
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(option);
-                Console.ResetColor();
-                string choice = Console.ReadLine().ToLower();
-
-
-
-                if (choice == answer[randomQuestion])
-
+                if (userInput == "no")
                 {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Thread.Sleep(1500);
+                        Console.Write(".");
+                    }
 
-                    Console.WriteLine("Congratz! You will live today and you also win my Tesla!" +
+                    Console.Write("What's wrong McFly? Oh err i mean " + Game.player.Name + ". ..Chicken? \n");
 
-                                          "\nGo ahead and try it!" +
-                    "\n Here you get a key");
-                    SolvedPuzzle = true;
-                    houseKey = new Key("House key", "", "I think this key will help me get my butt outside this house.", 4, "key");
-                    Game.player.keyList.Add(houseKey);
-                    Game.player.inventoryList.Add(houseKey);
-                   
-
+                    if (GetUserInput() == "nobody calls me chicken")
+                    {
+                        ExtraPuzzle(true);
+                        break;
+                    }
+                    else
+                    {
+                        ExtraPuzzle(false);
+                        break;
+                    }
+                }
+                else if (userInput == "yes")
+                {
+                    ExtraPuzzle(true);
+                    break;
                 }
 
-                else if (choice != answer[randomQuestion])
+            } while (true);
+        }
 
-                {
+        public void ExtraPuzzle(bool drankWine)
+        {
+            if (drankWine == true)
+            {
+                Console.WriteLine("You finish the whole bottle of wine. It actually tastes amazing, so you feel pretty great about the whole situation.");
+                PrintDramaticDots1();
+                Console.WriteLine("and then you pass out..");
+                Console.WriteLine();
 
-                    count--;
-
-                    Console.WriteLine("Wrong answer! You have: " + count + " left.");
-                    continue;
-
-                }
-
-                else if (count == 0)
-
-                {
-
-                    Console.WriteLine("Game over! Now you have to start over for another question! HAHAHA!");
-
-                    Console.WriteLine("BOOM! And there you faint away..");
-
-                }
-
-
+                PrintDramaticDots2();
             }
-            while (!SolvedPuzzle);
-    
-    
-       }
+            else
+            {
+                Console.WriteLine("The horror of drinking free wine makes you really scared as you make a turn, ready to run for your life. But like the chicken you are you slip and fall, hitting your head against the floor..");
+                
+                PrintDramaticDots1();
+                Console.WriteLine("and then you pass out..");
+                Console.WriteLine();
+
+                PrintDramaticDots2();
+            }
+
+            Console.WriteLine("you wake up, you see Fredrik standing right next to you as he shouts: \"What comes after Pang?!\"");
+
+            do
+            {
+                string userinput = GetUserInput();
+                if (userinput == "boom" || userinput == "bom")
+                {
+                    Console.WriteLine("Even with a screaming headache you manage to solve the riddle.");
+                    Console.WriteLine("Good job! Here's your grand prize, the house key. Oh and also i'll throw in something extra for you effort. Also, i'm keeping this wine.");
+                    GivePrizes();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong answer, try again!");
+                }
+            } while (true);
+
+        }
+
+        private void GivePrizes()
+        {
+            Key houseKey = new Key("House Key", " The front door key lies on the floor.", "This will open the front door", 4, "key");
+            Game.player.inventoryList.Add(houseKey);
+            Game.player.keyList.Add(houseKey);
+
+            Item rocket = new Item("SpaceX engineered Falcon Heavy", " Not every day you say a Falcon Heavy lying around. Strange.", "Now THIS could come in handy!!!","","");
+            Game.player.inventoryList.Add(rocket);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("You picked up " + houseKey.ItemName);
+            Console.WriteLine("You picked up " + rocket.ItemName);
+            Console.ResetColor();
+
+        }
+
+        private void PrintDramaticDots1()
+        {
+            Thread.Sleep(5000);
+            for (int i = 0; i < 2; i++)
+            {
+                Thread.Sleep(1500);
+                Console.Write(".");
+            }
+        }
+        private void PrintDramaticDots2()
+        {
+            Thread.Sleep(5000);
+            for (int i = 0; i < 2; i++)
+            {
+                Thread.Sleep(1500);
+                Console.Write(".");
+            }
+        }
     }
 
 }

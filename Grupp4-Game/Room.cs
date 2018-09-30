@@ -8,10 +8,10 @@ namespace Grupp4_Game
 {
     class Room
     {
-        string RoomName { get; set; }
+        public string RoomName { get; set; }
         public string RoomDescription { get; set; }
         public bool Visited { get; set; }
-        public string VisitedDescription { get; set; }
+        public string ExamineDescription { get; set; }
       
 
         public List<Item> roomInventory = new List<Item>();
@@ -21,12 +21,12 @@ namespace Grupp4_Game
 
 
 
-        public Room(string roomName, string roomDescription, string visitedDesc, bool visited)
+        public Room(string roomName, string roomDescription, string examineDescription, bool visited)
         {
             this.RoomName = roomName;
             this.RoomDescription = roomDescription;
             this.Visited = visited;
-            this.VisitedDescription = visitedDesc;
+            this.ExamineDescription = examineDescription;
         }
 
         public void PrintRoomName()
@@ -36,31 +36,35 @@ namespace Grupp4_Game
 
         public void ShowDescription()
         {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(RoomDescription);
-            
+            Console.Write(RoomDescription);
+            Console.WriteLine();
             foreach (var item in roomInventory)
             {
-                Console.Write(item.DroppedDescription);
+                if(item.DroppedDescription.Length > 0)
+                {
+                    Console.WriteLine(item.DroppedDescription);
+                }
             }
             foreach (var item in RoomProps)
             {
-                Console.Write(item.DroppedDescription);
+                Console.WriteLine(item.DroppedDescription);
             }
-            
-            Console.WriteLine();
             Console.ResetColor();
-        }
 
-        public void Inspect()
-        {
-            ShowDescription();
-            Console.WriteLine("Rummets inventory: ");
-            foreach (Item item in roomInventory)
-            {
-                Console.WriteLine(item.ItemName);
-            }
+            //List<string> result = new List<string>();
+
+            //foreach (var item in roomInventory)
+            //{
+            //    result.Add(item.DroppedDescription);
+            //}
+            //foreach (var item in RoomProps)
+            //{
+            //    result.Add(item.DroppedDescription);
+            //}
+
+            //string printString = string.Join(", ", result);
+            //Console.Write(printString + ".");
+
         }
-        //Exit
     }//Class
 }//namespace

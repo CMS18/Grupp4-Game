@@ -57,9 +57,9 @@ namespace Grupp4_Game
         {
             if (key.KeyID == door.DoorID)
             {
-                Console.WriteLine("Nyckeln passar");
+                Console.WriteLine("The key fits.");
             }
-            else Console.WriteLine("Nyckeln passar inte");
+            else Console.WriteLine("The key doesn't fit.");
         }
     }
     

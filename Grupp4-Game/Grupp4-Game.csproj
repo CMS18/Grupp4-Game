@@ -58,5 +58,10 @@
   <ItemGroup>
     <Folder Include="Items\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="teslaroadster.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
