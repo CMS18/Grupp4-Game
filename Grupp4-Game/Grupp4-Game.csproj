@@ -62,6 +62,7 @@
     <Content Include="groundcontrol.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="tesla.gif" />
     <Content Include="teslaroadster.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

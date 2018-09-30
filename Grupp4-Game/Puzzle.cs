@@ -30,7 +30,7 @@ namespace Grupp4_Game
             //Console.ForegroundColor = ConsoleColor.Cyan;
             Console.ResetColor();
             Console.WriteLine("A wild Fredrik Haglund appears from behind the kitchen door!\n" +
-            "\"Riddle me this!\" he says as he pulls up a sheet of paper with something written on it.\n");
+            "\"Riddle me this!\" he says as he pulls up a sheet of paper with something written on it.");
             PlayPuzzle();
         }
 

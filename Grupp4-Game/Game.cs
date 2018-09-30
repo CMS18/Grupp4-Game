@@ -36,7 +36,6 @@ namespace Grupp4_Game
         {
             Console.Clear();
             GameCompleted();
-            //GameActive = true;
             //player = new Player(playerName);
             //InitializeRooms();
             //InitializeItem();
@@ -75,6 +74,11 @@ namespace Grupp4_Game
             {
                 switch (word)
                 {
+                    case "HELP":
+                        {
+                            Console.WriteLine(@"The following commands exist: GO/MOVE, TAKE/GET/PICK, DROP, USE/OPEN, EXAMINE/INSPECT/LOOK, SHOW/INVENTORY.");
+                            break;
+                        }
                     case "GO":
                     case "MOVE":
                         {
@@ -205,8 +209,6 @@ namespace Grupp4_Game
 
         public static void GameCompleted()
         {
-
-
             PrintDramaticDots();
             Console.WriteLine("you leave the house and feel fresh air hitting your face, you're not sure when you last took a breath without feeling the smell of alcohol.");
             PrintDramaticDots();
@@ -219,6 +221,7 @@ namespace Grupp4_Game
             Console.WriteLine("and obviously you try sitting in the drivers seat..");
             PrintDramaticDots();
             Console.WriteLine("a hatch opens and you're flung into outer space..");
+
             Thread.Sleep(2000);
             Console.WriteLine();
             SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\rober\Source\Repos\Grupp4-Game2\Grupp4-Game\groundcontrol.wav");
@@ -260,7 +263,6 @@ namespace Grupp4_Game
             Console.WriteLine("Thanks for playing the game!");
             Console.ReadLine();
         }
-
     } //class
 } //namespace 
 
