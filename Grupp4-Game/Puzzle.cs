@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 namespace Grupp4_Game
 {
     class Puzzle
@@ -26,6 +28,8 @@ namespace Grupp4_Game
 
         public Puzzle()
         {
+            SoundPlayer simpleSound = new SoundPlayer(@"metalgearsolid.wav");
+            simpleSound.Play();
             Chances = 4;
             Console.ResetColor();
             Console.WriteLine("A wild Fredrik Haglund appears from behind the kitchen door!\n" +
@@ -197,11 +201,11 @@ namespace Grupp4_Game
 
         private void GivePrizes()
         {
-            Key houseKey = new Key("House Key", " The front door key lies on the floor.", "This will open the front door", 4, "key");
+            Key houseKey = new Key("House Key", "The front door key lies on the floor.", "This will open the front door", 4, "key");
             Game.player.inventoryList.Add(houseKey);
             Game.player.keyList.Add(houseKey);
 
-            Item rocket = new Item("SpaceX engineered Falcon Heavy", " Not every day you say a Falcon Heavy lying around. Strange.", "Now THIS could come in handy!!!","","");
+            Item rocket = new Item("SpaceX engineered Falcon Heavy", "Not every day you say a Falcon Heavy lying around. Strange.", "Now THIS could come in handy!!!","","");
             Game.player.inventoryList.Add(rocket);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You picked up " + houseKey.ItemName);

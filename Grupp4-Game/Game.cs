@@ -51,14 +51,10 @@ namespace Grupp4_Game
                 {
                     player.CurrentPosition.ShowDescription();
                 }
-                //else if (player.CurrentPosition.RoomName.ToUpper() == "OUTDOORS")
-                //{
-                //    GameCompleted();
-                //}
+              
                 player.CurrentPosition.Visited = true;
 
                 userinput = GetUserInput();
-
 
                 Console.ResetColor();
                 string[] userInput = userinput.ToUpper().Split(' ');
