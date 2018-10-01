@@ -110,7 +110,7 @@ namespace Grupp4_Game
                             break;
                         }
                     default:
-                        Console.WriteLine("Sorry, didn't understand that command. Try again.");
+                        Console.WriteLine("Sorry, didn't understand that command. Write \"help\" for commands.");
                         break;
                 }
                 break;
