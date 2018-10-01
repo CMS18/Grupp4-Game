@@ -13,6 +13,7 @@ namespace Grupp4_Game
         private bool GameWon { get; set; }
         private string Answer { get; set; }
         private int Chances { get; set; }
+        private int CompletedQuestions = 0;
 
         string[] question = {
                 "Which car brand is the coolest one? (Sorry Samie i don't think you can get this one right).",
@@ -25,6 +26,14 @@ namespace Grupp4_Game
                 ".thenby()",
                 "null"
             };
+
+        string[] hint =
+        {
+            "The answer rhymes with \"besla\".",
+                "First i wanna order by this, and then by that..",
+                "When i eat too much my stomach gets full, and a strings default value is.."
+        };
+
 
         public Puzzle()
         {
@@ -43,29 +52,44 @@ namespace Grupp4_Game
             Console.WriteLine();
             do
             {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine(question[0]);
-                Console.ResetColor();
-                if (GetUserInput() == answer[0])
+                
+                
+               
+                for (int i = 0; i < question.Length; i++)
                 {
-                    Console.WriteLine("Correct! Next question.");
-                    break;
-                }
-                else
-                {
-                    Chances--;
-                    Console.WriteLine("Wrong answer! Hint: The answer rhymes with \"besla\".");
-                }
-                if (Chances == 0)
-                {
-                    PuzzleGameOver();
-                    break;
+                    if (Chances == 0)
+                    {
+                        PuzzleGameOver();
+                        break;
+                    }
+                    if (CompletedQuestions == 3)
+                    {
+                        Console.WriteLine("Congratulations! You won the grand prize, the house key! Oh and also I'll throw in something extra for you effort.");
+                        GivePrizes();
+                        return;
+                    }
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(question[i]);
+                    Console.ResetColor();
+
+                    if (GetUserInput() == answer[i])
+                    {
+                        Console.WriteLine("Correct! Next question.");
+                        CompletedQuestions++;
+                        continue;
+                    }
+                    else
+                    {
+                        Chances--;
+                        Console.WriteLine("Wrong answer! Hint: " + hint[i]);
+                        i--;
+                    }
                 }
 
             }
             while (Chances > 0);
 
-            while (Chances > 0)
+           /* while (Chances > 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(question[1]);
@@ -109,7 +133,7 @@ namespace Grupp4_Game
                     PuzzleGameOver();
                     break;
                 }
-            }
+            }*/
         }
 
         public string GetUserInput()

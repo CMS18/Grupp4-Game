@@ -121,7 +121,7 @@ namespace Grupp4_Game
         public void InitializePlayer()
         {
 
-            player.CurrentPosition = livingRoom; //startposition
+            player.CurrentPosition = kitchen; //startposition
             livingRoom.Visited = false;
 
         }
