@@ -35,12 +35,11 @@ namespace Grupp4_Game
         public Game(string playerName)
         {
             Console.Clear();
-            GameCompleted();
-            //player = new Player(playerName);
-            //InitializeRooms();
-            //InitializeItem();
-            //InitializePlayer();
-            //TakeUserInput();
+            player = new Player(playerName);
+            InitializeRooms();
+            InitializeItem();
+            InitializePlayer();
+            TakeUserInput();
         }
 
 
@@ -177,7 +176,7 @@ namespace Grupp4_Game
             #region Skapar upp alla items.
             kitchenKey = new Key("Kitchen key", "", "You'd rather not examine this any further.", 2, "key");
             knife = new Item("Knife", "You see a shiny sharp knife on the floor. On the side it reads \"MORAKNIV\".", "A sharp knife, could definitely come to use.", "1", "knife");
-            beercan = new Item("Beer can", "Next to you lies a half full beer can. It reads: \"Norrlands Guld\".", "I wouldn't want to drink this. Not sure why'd anyone would pick it up actually. Hmm..", "1", "can");
+            beercan = new Item("Beer can", "Next to you lies a half full beer can. It reads: \"Norrlands Guld\".", "Ýou wouldn't want to drink this. Not sure why'd anyone would pick it up actually. Hmm..", "1", "can");
             wineBottle = new Item("Wine bottle", "A wine bottle lays on the floor. Your mind's telling you no, but your body's telling you yes.", "Perhaps you can drink this and forget about your sorrows.", "0", "bottle");
             toilet = new RoomProp("Toilet", "You see an unflushed toilet, who would do such a thing. It looks like there's something in it.", "While inspecting the disgusting toilet you see a key, dare you take it?", "toilet");
 

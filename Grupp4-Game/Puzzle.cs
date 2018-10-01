@@ -16,7 +16,7 @@ namespace Grupp4_Game
         private int CompletedQuestions = 0;
 
         string[] question = {
-                "Which car brand is the coolest one? (Sorry Samie i don't think you can get this one right).",
+                "Which car brand is the coolest one? (Sorry Samie I don't think you can get this one right).",
                 "If you user .OrderBy(), what can you use afterwards to customise the order even further?",
                 "Which default value does a string have?",
             };
@@ -30,8 +30,8 @@ namespace Grupp4_Game
         string[] hint =
         {
             "The answer rhymes with \"besla\".",
-                "First i wanna order by this, and then by that..",
-                "When i eat too much my stomach gets full, and a strings default value is.."
+                "First I wanna order by this, and then by that..",
+                "When I eat too much my stomach gets full, and a strings default value is.."
         };
 
 
@@ -52,9 +52,6 @@ namespace Grupp4_Game
             Console.WriteLine();
             do
             {
-                
-                
-               
                 for (int i = 0; i < question.Length; i++)
                 {
                     if (Chances == 0)
@@ -68,7 +65,7 @@ namespace Grupp4_Game
                         GivePrizes();
                         return;
                     }
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine(question[i]);
                     Console.ResetColor();
 
@@ -89,51 +86,7 @@ namespace Grupp4_Game
             }
             while (Chances > 0);
 
-           /* while (Chances > 0)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine(question[1]);
-                Console.ResetColor();
-                if (GetUserInput() == answer[1])
-                {
-                    Console.WriteLine("Correct! Next question.");
-                    break;
-                }
-                else
-                {
-                    Chances--;
-                    Console.WriteLine("Wrong answer! Hint: First i wanna order by this, and then by that..");
-                }
-                if (Chances == 0)
-                {
-                    PuzzleGameOver();
-                    break;
-                }
-            }
-
-
-            while (Chances > 0)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine(question[2]);
-                Console.ResetColor();
-                if (GetUserInput() == answer[2])
-                {
-                    Console.WriteLine("Congratulations! You won the grand prize, the house key! Oh and also i'll throw in something extra for you effort.");
-                    GivePrizes();
-                    break;
-                }
-                else
-                {
-                    Chances--;
-                    Console.WriteLine("Wrong answer! Hint: When i eat too much my stomach gets full, and a strings default value is..");
-                }
-                if (Chances == 0)
-                {
-                    PuzzleGameOver();
-                    break;
-                }
-            }*/
+           
         }
 
         public string GetUserInput()

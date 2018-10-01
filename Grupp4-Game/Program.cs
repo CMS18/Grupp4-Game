@@ -11,7 +11,7 @@ namespace Grupp4_Game
     {
         static void Main(string[] args)
         {
-            Console.Title = "A hungover adventure";
+            Console.Title = "A hungover adventure.";
 
             Console.Write("Welcome to \"A hungover adventure\"." +
                 "\nPlease enter your name to start the game: ");

@@ -49,21 +49,6 @@ namespace Grupp4_Game
                 Console.WriteLine(item.DroppedDescription);
             }
             Console.ResetColor();
-
-            //List<string> result = new List<string>();
-
-            //foreach (var item in roomInventory)
-            //{
-            //    result.Add(item.DroppedDescription);
-            //}
-            //foreach (var item in RoomProps)
-            //{
-            //    result.Add(item.DroppedDescription);
-            //}
-
-            //string printString = string.Join(", ", result);
-            //Console.Write(printString + ".");
-
         }
     }//Class
 }//namespace
