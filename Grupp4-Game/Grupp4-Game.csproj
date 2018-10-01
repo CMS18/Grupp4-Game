@@ -65,7 +65,9 @@
     <Content Include="metalgearsolid.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="tesla.gif" />
+    <Content Include="tesla.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="teslaroadster.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

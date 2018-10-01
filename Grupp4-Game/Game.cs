@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Media;
+using System.Diagnostics;
 
 namespace Grupp4_Game
 {
     class Game
     {
         public static Player player { get; set; }
-        //public static bool GameActive {get; set;}
         Room hallway;
         Room kitchen;
         Room outdoor;
@@ -256,6 +256,9 @@ namespace Grupp4_Game
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Thanks for playing the game!");
+            Console.WriteLine("Press enter to view the amazing gif..");
+            Console.ReadLine();
+            Process.Start(@"tesla.gif");
             Console.ReadLine();
         }
     } //class
