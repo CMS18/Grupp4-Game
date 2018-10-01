@@ -176,7 +176,7 @@ namespace Grupp4_Game
                         {
                             foreach (var key in keyList)
                             {
-                                if (exit.DoorID == key.KeyID)
+                                if (exit.DoorID == key.KeyID && inventoryList.Contains(key))
                                 {
                                     exit.Locked = false;
                                     Console.WriteLine("The key fits, and the door unlocks.");
