@@ -71,7 +71,7 @@ namespace Grupp4_Game
                 {
                     case "HELP":
                         {
-                            Console.WriteLine(@"The following commands exist: GO/MOVE, TAKE/GET/PICK, DROP, USE/OPEN, EXAMINE/INSPECT/LOOK, SHOW/INVENTORY.");
+                            Console.WriteLine(@"The following commands exist: GO/MOVE, TAKE/GET/PICK, DROP, USE/OPEN, EXAMINE/INSPECT, SHOW/INVENTORY.");
                             break;
                         }
                     case "GO":
@@ -98,7 +98,6 @@ namespace Grupp4_Game
                         }
                     case "EXAMINE":
                     case "INSPECT":
-                    case "LOOK":
                         {
                             player.Examine(userInput);
                             break;
