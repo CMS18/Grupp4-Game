@@ -43,7 +43,9 @@ namespace Grupp4_Game
             Console.WriteLine();
             do
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(question[0]);
+                Console.ResetColor();
                 if (GetUserInput() == answer[0])
                 {
                     Console.WriteLine("Correct! Next question.");
@@ -65,7 +67,9 @@ namespace Grupp4_Game
 
             while (Chances > 0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(question[1]);
+                Console.ResetColor();
                 if (GetUserInput() == answer[1])
                 {
                     Console.WriteLine("Correct! Next question.");
@@ -86,7 +90,9 @@ namespace Grupp4_Game
 
             while (Chances > 0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(question[2]);
+                Console.ResetColor();
                 if (GetUserInput() == answer[2])
                 {
                     Console.WriteLine("Congratulations! You won the grand prize, the house key! Oh and also i'll throw in something extra for you effort.");
@@ -205,7 +211,7 @@ namespace Grupp4_Game
             Game.player.inventoryList.Add(houseKey);
             Game.player.keyList.Add(houseKey);
 
-            Item rocket = new Item("SpaceX engineered Falcon Heavy", "Not every day you say a Falcon Heavy lying around. Strange.", "Now THIS could come in handy!!!","","");
+            Item rocket = new Item("SpaceX engineered Falcon Heavy", "Not every day you see a Falcon Heavy lying around. Strange.", "Now THIS could come in handy!!!","","");
             Game.player.inventoryList.Add(rocket);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You picked up " + houseKey.ItemName);

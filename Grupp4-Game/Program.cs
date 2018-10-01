@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,8 @@ namespace Grupp4_Game
                 "\nPlease enter your name to start the game: ");
             Game StartGame = new Game(Console.ReadLine());
 
-          
-            //StartGame.TakeUserInput();
-            
+
+
 
         }
     }
