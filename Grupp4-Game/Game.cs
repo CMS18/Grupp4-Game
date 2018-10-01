@@ -35,11 +35,12 @@ namespace Grupp4_Game
         public Game(string playerName)
         {
             Console.Clear();
-            player = new Player(playerName);
-            InitializeRooms();
-            InitializeItem();
-            InitializePlayer();
-            TakeUserInput();
+            GameCompleted();
+            //player = new Player(playerName);
+            //InitializeRooms();
+            //InitializeItem();
+            //InitializePlayer();
+            //TakeUserInput();
         }
 
 
