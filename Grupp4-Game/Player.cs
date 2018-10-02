@@ -15,7 +15,7 @@ namespace Grupp4_Game
 
         public Player(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public void PickUpItem(string[] userinput)
@@ -42,7 +42,6 @@ namespace Grupp4_Game
                         success = true;
                         return;
                     }
-                    
                 }
             }
             if (success == false)
@@ -128,6 +127,7 @@ namespace Grupp4_Game
                     Console.Write(item.DroppedDescription);
                 }
                 Console.ResetColor();
+                Console.WriteLine();
             }
         }
 
@@ -144,12 +144,11 @@ namespace Grupp4_Game
 
             string result = string.Join(", ", exits);
             Console.Write(result + ".");
-
         }
 
         public void CreateKey()
         {
-            Key beerKey = new Key("Beer Key", " You see a really weird key on the floor.", "It probably won't work but the force is strong within this key.", 1, "key");
+            Key beerKey = new Key("Beer Key", "You see a really weird key on the floor.", "It probably won't work but the force is strong within this key.", 1, "key");
             inventoryList.Add(beerKey);
             keyList.Add((Key)beerKey);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -284,7 +283,7 @@ namespace Grupp4_Game
             {
                 if (item.ItemName.ToUpper().Contains(userinput[0]))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Dropped {0}.", item.ItemName);
                     inventoryList.Remove(item);
                     CurrentPosition.roomInventory.Add(item);

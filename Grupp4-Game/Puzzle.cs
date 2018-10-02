@@ -17,7 +17,7 @@ namespace Grupp4_Game
 
         string[] question = {
                 "Which car brand is the coolest one? (Sorry Samie I don't think you can get this one right).",
-                "If you user .OrderBy(), what can you use afterwards to customise the order even further?",
+                "If you use .OrderBy(), what can you use afterwards to customise the order even further?",
                 "Which default value does a string have?",
             };
 

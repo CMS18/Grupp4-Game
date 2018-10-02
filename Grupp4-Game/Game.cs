@@ -12,6 +12,7 @@ namespace Grupp4_Game
 {
     class Game
     {
+        #region Properties och dylikt
         public static Player player { get; set; }
         Room hallway;
         Room kitchen;
@@ -31,6 +32,7 @@ namespace Grupp4_Game
         List<Item> playerInventory = new List<Item>();
         public string[] actionArray = { "GO", "LOOK", "MOVE", "SHOW", "OPEN", "DROP", "TAKE", "USE", "RIGHT", "BACK", "FORWARD", "LEFT" };
         public string userinput;
+        #endregion
 
         public Game(string playerName)
         {
@@ -41,7 +43,6 @@ namespace Grupp4_Game
             InitializePlayer();
             TakeUserInput();
         }
-
 
         public void TakeUserInput()
         {
@@ -215,33 +216,33 @@ namespace Grupp4_Game
             Console.WriteLine("and obviously you try sitting in the drivers seat..");
             PrintDramaticDots();
             Console.WriteLine("a hatch opens and you're flung into outer space..");
-
-            Thread.Sleep(2000);
-            Console.WriteLine();
             SoundPlayer simpleSound = new SoundPlayer(@"groundcontrol.wav");
             simpleSound.Play();
-            Console.WriteLine();
+            Thread.Sleep(2000);
+            //Console.WriteLine();
+            
+            //Console.WriteLine();
 
-            StreamReader reader = new StreamReader("teslaroadster.txt");
-            string line = "";
-            int getrows = TotalLines("teslaroadster.txt");
+            //StreamReader reader = new StreamReader("teslaroadster.txt");
+            //string line = "";
+            //int getrows = TotalLines("teslaroadster.txt");
 
-            int TotalLines(string filePath)
-            {
-                using (StreamReader r = new StreamReader(filePath))
-                {
-                    int i = 0;
-                    while (r.ReadLine() != null) { i++; }
-                    return i;
-                }
-            }
+            //int TotalLines(string filePath)
+            //{
+            //    using (StreamReader r = new StreamReader(filePath))
+            //    {
+            //        int i = 0;
+            //        while (r.ReadLine() != null) { i++; }
+            //        return i;
+            //    }
+            //}
 
-            for (int i = 0; i < getrows; i++)
-            {
-                line = reader.ReadLine();
-                Thread.Sleep(50);
-                Console.WriteLine(line);
-            }
+            //for (int i = 0; i < getrows; i++)
+            //{
+            //    line = reader.ReadLine();
+            //    Thread.Sleep(50);
+            //    Console.WriteLine(line);
+            //}
 
             void PrintDramaticDots()
             {
@@ -252,12 +253,15 @@ namespace Grupp4_Game
                     Console.Write(".");
                 }
             }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Thanks for playing the game!");
-            Console.WriteLine("Press enter to view the amazing gif..");
-            Console.ReadLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Thread.Sleep(1000);
+            //Console.WriteLine("Press enter to view the amazing gif..");
+            //Console.ReadLine();
             Process.Start(@"tesla.gif");
+            Thread.Sleep(10000);
+            Process.Start(@"starman.gif");
+            Console.WriteLine("Thanks for playing the game!");
             Console.ReadLine();
         }
     } //class

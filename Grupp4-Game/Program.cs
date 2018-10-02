@@ -17,9 +17,6 @@ namespace Grupp4_Game
                 "\nPlease enter your name to start the game: ");
             Game StartGame = new Game(Console.ReadLine());
 
-
-
-
         }
     }
 } 
